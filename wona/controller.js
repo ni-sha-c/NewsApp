@@ -8,13 +8,16 @@ controller.prototype = {
                  var callback = (typeof callback === 'function') ? callback : function() {};
                   
                      var data = {
-                            'user' : user ? user : 'nobody'
+                             user ? user : 'nobody'
                                   };
                       
                       view.renderView('view', data, function(data) {
                                  callback(data);
                                      });
-                           }
+                           },
+    hash: function hash(text){
+                    return crypto.createHash('sha1').update(crypto.createHash('md5').update(text).digest('hex')).digest('hex');
+                      }
 };
  
 module.exports = new controller();
