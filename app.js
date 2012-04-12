@@ -123,8 +123,8 @@ app.post('/signup', function (req, res){
 
 app.get('/post', function(req, res)
     {
-      var Converter = require("./pagedown/Markdown.Converter.js").Converter;
-          var converter = new Converter();
+      //var Converter = require("./pagedown/Markdown.Converter.js").Converter;
+        //  var converter = new Converter();
               //console.log(converter.makeHtml("**I am bold!**"));
       res.render('post.html',{layout: false});
     });
