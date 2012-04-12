@@ -1,5 +1,4 @@
 body {
-	background:#EEE url(../images/body.png) repeat-x;
 	font: 13px "Trebuchet MS", Arial, Verdana;
 	padding:20px;
 }
@@ -16,6 +15,10 @@ p em a {
 h1 a {
 	width:700px;
 	height:200px;
-	background:transparent url(../images/r.png) no-repeat center center;
 }
+div.container{
+	width:960px;
+	margin:0px auto;
+}
+
 

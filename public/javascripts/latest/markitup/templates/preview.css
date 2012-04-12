@@ -1,5 +1,25 @@
 /* preview style examples */
 body {
-	background-color:#EFEFEF;
+	background:#fff;
 	font:70% Verdana, Arial, Helvetica, sans-serif;
+}
+h4{
+	font-family: 'Caudex';
+	font-size: 23px;
+	border-bottom: 1px solid #565656;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+	border-bottom-color: #565656;
+	padding-left: 10px;
+	padding-bottom: 5px;
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+p{
+	font-size: 13px;
+	color: #4A4A4A;
+}
+@font-face {
+  font-family: 'Caudex';
+  src: local('Caudex'), url('../../../../stylesheets/fonts/Caudex.woff') format('woff');
 }

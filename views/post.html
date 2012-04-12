@@ -3,17 +3,17 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>markItUp! Universal markup editor</title>
-<link rel="stylesheet" type="text/css" href="stylesheets/post.css" />
+<link rel="stylesheet" type="text/css" href="../public/stylesheets/post.css" />
 <!-- jQuery -->
 <script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
 <!-- markItUp! -->
-<script type="text/javascript" src="javascripts/latest/markitup/jquery.markitup.js"></script>
+<script type="text/javascript" src="../public/javascripts/latest/markitup/jquery.markitup.js"></script>
 <!-- markItUp! toolbar settings -->
-<script type="text/javascript" src="javascripts/latest/markitup/sets/default/set.js"></script>
+<script type="text/javascript" src="../public/javascripts/latest/markitup/sets/default/set.js"></script>
 <!-- markItUp! skin -->
-<link rel="stylesheet" type="text/css" href="javascripts/latest/markitup/skins/markitup/style.css" />
+<link rel="stylesheet" type="text/css" href="../public/javascripts/latest/markitup/skins/markitup/style.css" />
 <!--  markItUp! toolbar skin -->
-<link rel="stylesheet" type="text/css" href="javascripts/latest/markitup/sets/default/style.css" />
+<link rel="stylesheet" type="text/css" href="../public/javascripts/latest/markitup/sets/default/style.css" />
 </head>
 <body>
 <script type="text/javascript">
@@ -49,14 +49,15 @@ $(document).ready(function()	{
 });
 -->
 </script>
-<h1>Post Here</h1>
-
-<p>Click <a href="#" class="add">this link to insert content</a> from anywhere in the page or <a href="#" class="toggle">this one to <span>remove markItUp!</span></a></p>
+<div class="container">
+	<h1>Post Here</h1>
+	<p>Click <a href="#" class="add">this link to insert content</a> from anywhere in the page or <a href="#" class="toggle">this one to <span>remove markItUp!</span></a></p>
 <p>
-<textarea id="markItUp" cols="80" rows="20">
-&lt;h1&gt;Welcome!&lt;/h1&gt;
-</textarea>
+	<textarea id="markItUp" cols="100" rows="20">
+	&lt;h4&gt;Article Title&lt;/h4&gt;
+	&lt;p&gt;Post Content&lt;/p&gt;
+	</textarea>
 </p>
-
+</div>
 </body>
 </html>
