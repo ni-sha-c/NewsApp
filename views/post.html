@@ -16,8 +16,9 @@
 <link rel="stylesheet" type="text/css" href="javascripts/latest/markitup/sets/default/style.css" />
 </head>
 <body>
+
 <script type="text/javascript">
-<!--
+
 $(document).ready(function()	{
 	// Add markItUp! to your textarea in one line
 	// $('textarea').markItUp( { Settings }, { OptionalExtraSettings } );
@@ -47,16 +48,19 @@ $(document).ready(function()	{
  		return false;
 	});
 });
--->
+
 </script>
 <h1>Post Here</h1>
 
 <p>Click <a href="#" class="add">this link to insert content</a> from anywhere in the page or <a href="#" class="toggle">this one to <span>remove markItUp!</span></a></p>
 <p>
-<textarea id="markItUp" cols="80" rows="20">
+<form id="postHere" method="post" action='/post'>
+<textarea id="markItUp" name="contents" cols="80" rows="20">
 &lt;h1&gt;Welcome!&lt;/h1&gt;
 </textarea>
-</p>
 
+<input type="submit" name="post" value="post" />
+</form>
+</p>
 </body>
 </html>

@@ -3,7 +3,8 @@ var mysql = require('mysql');
 var crypto = require('crypto');
 var mysql = require('mysql');
 var DATABASE = 'wona';
-var TABLE = 'editor';
+var EDITOR_TABLE = 'editor';
+var POST_TABLE='posts'
 var client = mysql.createClient({
     user: 'root',
       password: 'hello',
@@ -21,7 +22,7 @@ controller.prototype = {
 
   insertNewUser : function (id, name, password,callback) {  
 client.query(
-      'INSERT INTO '+TABLE+' '+
+      'INSERT INTO '+EDITOR_TABLE+' '+
         'SET id= ?, name = ?, password = ?, articles = ?',
           [id, name,password,null], function( err, info)
           {
@@ -62,7 +63,7 @@ client.query(
     login : function(session, callback) {
               var username = session.username;
               var password = session.password;
-              client.query('SELECT password FROM '+TABLE+' WHERE name=?',[username], function (err, results, fields) {
+              client.query('SELECT password FROM '+EDITOR_TABLE+' WHERE name=?',[username], function (err, results, fields) {
                 if(err==null)
               {
                 
@@ -87,7 +88,35 @@ client.query(
                 else
                 console.log(err);
               });
-            }
+            },
+
+     post : function(id, title, author,contents,time,callback)
+                {
+                
+                client.query('INSERT INTO '+POST_TABLE+' '+'SET pid= ?, title = ?, author = ?,contents = ?,time = ?',[id, title, author, contents,time], function( err, info)
+          {
+             if(err==null)
+                {
+                  console.log("inserted new article: " + title); 
+                  callback(info);
+                }
+            else 
+                 {
+                   console.log(err);
+                  callback(null);
+                 }
+          }
+            
+    );
+
+
+
+                
+                
+                
+                
+                
+                }                    
 
 };
  

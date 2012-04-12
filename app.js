@@ -120,6 +120,23 @@ app.post('/signup', function (req, res){
         
 
 });
+app.post('/post', function(req, res)
+    {
+        var article = req.body.contents;
+      console.log(article);
+      var callback = function(data)
+        {
+          if(data==null)
+            {           
+              console.log("sorry!error in posting the article!");
+              res.redirect('/error');
+            }
+          else
+            console.log(data);
+          };
+
+      controller.post(article,callback);
+    });
 
 app.get('/post', function(req, res)
     {
@@ -127,6 +144,8 @@ app.get('/post', function(req, res)
         //  var converter = new Converter();
               //console.log(converter.makeHtml("**I am bold!**"));
       res.render('post.html',{layout: false});
+      
+
     });
   
 
