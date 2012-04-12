@@ -1,4 +1,3 @@
-
 /**
  * Module dependencies.
  */
@@ -14,6 +13,16 @@ var app = module.exports = express.createServer();
 app.configure(function(){
   app.set('views', __dirname + '/views');
   app.set('view engine', 'jade');
+  app.set("view options", {layout: false});
+
+    // make a custom html template
+  app.register('.html', {
+          compile: function(str, options){
+                           return function(locals){
+                                     return str;
+                                           };
+                               }
+                     });
   app.use(express.bodyParser());
   app.use(express.methodOverride());
   app.use(app.router);
@@ -36,7 +45,7 @@ app.configure('production', function(){
 
 app.get('/', function (req, res)
     {
-            res.render("index",{layout: false});
+            res.render("index.html",{layout: false});
     }
 
       );
@@ -67,7 +76,10 @@ app.post('/login', function(req, res){
   res.redirect('/login');
 }
     else 
-    console.log(json[0]["password"]);
+    {
+      console.log("successfully logged in user: " + session.username);
+      res.redirect('/');
+    }
   }
   controller.login(session,callback);
 
@@ -82,7 +94,7 @@ app.get('/signup', function (req, res){
 });
 app.post('/signup', function (req, res){
   
-  console.log(req.body.username + " is signing up!");
+  console.log(req.body.username + "  is tyring to sign up!");
   /*hash: function hash(text){
   return crypto.createHash('sha1').update(crypto.createHash('md5').       update(text).digest('hex')).digest('hex');
                                             }*/
@@ -90,12 +102,32 @@ app.post('/signup', function (req, res){
         var password = controller.hash(req.body.pass);
         console.log(password);
         var id = crypto.createHash('md5').update(req.body.username).digest('hex');
+        var callback = function (data)
+          {
+            if(data==null)
+            {
+              console.log("user already exists!");
+              res.redirect('/signup');
+            }
+            else {
+
+              console.log("successfully signed in!");
+              res.redirect('/');
+            }
+          };
+        controller.insertNewUser(id,name, password, callback);
         
-        controller.insertNewUser(id,name, password);
-        res.redirect('/');
         
 
 });
+
+app.get('/post', function(req, res)
+    {
+      var Converter = require("./pagedown/Markdown.Converter.js").Converter;
+          var converter = new Converter();
+              //console.log(converter.makeHtml("**I am bold!**"));
+      res.render('post.html',{layout: false});
+    });
   
 
 

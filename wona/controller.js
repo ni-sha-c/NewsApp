@@ -19,27 +19,28 @@ var controller = function() {};
 controller.prototype = {
 
 
-  insertNewUser : function (id, name, password) {  
+  insertNewUser : function (id, name, password,callback) {  
 client.query(
       'INSERT INTO '+TABLE+' '+
         'SET id= ?, name = ?, password = ?, articles = ?',
-          [id, name,password,null]
+          [id, name,password,null], function( err, info)
+          {
+             if(err==null)
+                {
+                  console.log("inserted new user: " + name); 
+                  callback(info);
+                }
+            else 
+                 {
+                   console.log(err);
+                  callback(null);
+                 }
+          }
+            
     );
 
 
-client.query(
-    'SELECT * FROM '+TABLE,
-    function selectCb(err, results, fields) {
-      if (err) {
-        throw err;
-                          }
 
-                  console.log(results);
-                      console.log(fields);
-                      client.end();
-                            }
-    );
-console.log("inserted new user" + name);
 },
 
  
