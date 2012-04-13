@@ -1,0 +1,261 @@
+@import "normalize.less";
+
+
+/* ===== Primary Styles ========================================================
+   Author:SDSLabs
+   ========================================================================== */
+
+
+/* Dimensions */
+@PageWidth:1112px;
+@Background:#fff;
+@Blue:#20ACB8;
+@Text:#666;
+@Grey:#f5f5f5;
+@borderColor:@Grey - #444444;
+@containerBorder:0px solid @borderColor;
+@font:"Arial";
+@darkFont:#e4e4e4;
+@footerBackground:#111;
+body{
+	background:@Background;
+	font-family:Arial,Verdana;
+	font-size:13px;	
+	overflow-x:hidden;
+}
+div.container{
+	background:#fff;
+	font-family:@font;
+	margin:0 auto;
+	width:@PageWidth;
+	border-left:@containerBorder;
+	border-right:@containerBorder;
+	border-bottom:@containerBorder;
+	
+}
+header{
+	border-top:3px solid @footerBackground;
+	h4{
+			margin:5px;
+			font-family:'Caudex',Arial,Verdana;
+			font-weight:bold;
+			font-size:18px;
+		}
+	background:#fff;
+	font-size:14px;
+	height:200px;
+	
+	border-bottom:1px solid @Grey - #565656;
+	div{
+		float:left;
+		height:200px;
+	}
+	.logo{
+		width:@PageWidth*0.3;
+		}
+	.archives{
+		width:@PageWidth*0.4;
+		overflow:hidden;
+		.archive-scroll{
+			width:@PageWidth*1;
+			img{
+				height:150px;
+			}
+			div{
+				width:@PageWidth*0.4;
+				float:left;
+				
+			}
+			span{
+				color:#454545;
+			}
+		}
+	}
+	.links{
+		height:100px;
+		width:@PageWidth*0.3;
+		ul{ 
+			margin:0;
+			padding:0;
+			
+			li{
+				list-style:none;
+				
+			}
+		}
+	}
+	.subscribe{
+		height:100px;
+		width:@PageWidth*0.3;
+		input[type=email]{
+			border:1px dotted;
+		}
+		input[type=submit]{
+			border:1px dotted;
+			background:#fff;
+		}
+		input{
+			font-size:13px;
+			margin:2px;
+		}
+	}
+	h4{	
+	}
+}
+.shadow{
+	-webkit-box-shadow: 0px 3px 5px rgba(50, 50, 50, 0.3);
+	-moz-box-shadow:    0px 3px 5px rgba(50, 50, 50, 0.3);
+	box-shadow:         0px 3px 5px rgba(50, 50, 50, 0.3);
+}
+.curved(@radius){
+	-webkit-border-bottom-right-radius: @radius;
+	-webkit-border-bottom-left-radius: @radius;
+	-moz-border-radius-bottomright: @radius;
+	-moz-border-radius-bottomleft: @radius;
+	border-bottom-right-radius: @radius;
+	border-bottom-left-radius: @radius;
+}
+.block{
+	float:left;
+	margin:0px;
+	h3{
+		color:@Blue;
+		font-family:'QuicksandLight',Arial,Verdana;
+		font-size:18px;
+		margin-top:@margin;
+		margin-bottom:@margin;
+	}
+	p{
+		font-size:13px;
+		color:@Grey - #ababab;
+		img{
+			margin:10px;
+		}
+	}
+	img{
+		float:left;
+		margin:0;
+		padding:0;
+	}
+
+}
+div.news-block{
+	.block;
+	width:278px;
+	p{
+	border-bottom:1px solid @Grey;
+	padding-bottom:10px;
+	padding-left:10px;
+	
+	}
+	.news-scroll{
+		margin-right:20px;
+		text-align:justify;
+		border-left:1px solid @Blue;		
+	}
+	
+}
+@margin:10px;
+div.articles-block{
+	.block;
+	width:556px;
+	text-align:justify;
+	.articles-scroll{
+		h4{
+		font-family:'Caudex';
+		font-size:23px;
+		border-bottom:1px solid #565656;
+		padding-left:10px;
+		padding-bottom:5px;
+		margin-top:@margin;
+		margin-bottom:@margin;
+		}
+		font-size:18px;
+		margin-right:20px;
+		line-height:22px;
+		
+	}
+	p:first-letter{
+	font-family:'QuicksandLight';
+	font-size:40px;
+	float:left;
+	}
+}
+div.auxiliary-block{
+	.block;
+	width:278px;
+}
+div.blog-listing{
+	margin:0px;
+	padding:0px;
+	ul{
+		list-style:none;
+		margin:0px;
+		padding:0px;
+		li{
+			margin-top:10px;
+			padding:0px;
+			font-family:'Caudex';
+			text-transform:capitalize;
+			font-size:16px;
+			border-bottom:1px dotted #343434;
+		}
+	}
+}
+/*Footer Starts here */
+footer{
+	position:static;
+	bottom:0px;
+	left:0px;
+	width:100%;
+}
+.footer-note{
+	position:relative;
+	margin:0px auto;
+	width:@PageWidth;
+	text-align:center;
+	background:@footerBackground;	
+	color:@darkFont;
+	font-family:'Satellite';
+	padding:10px;
+	ul{
+		list-style:none;
+		padding:0px;
+		margin:0px;
+		float:right;
+		li{
+			display:inline;
+			padding:0;
+			margin:0;
+		}
+	}
+	
+}
+.clear{
+	clear:both;
+}
+
+@font-face {
+    font-family: 'QuicksandLight';
+    src: url('../fonts/Quicksand_Light-webfont.eot');
+    src: url('../fonts/Quicksand_Light-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/Quicksand_Light-webfont.woff') format('woff'),
+         url('../fonts/Quicksand_Light-webfont.ttf') format('truetype'),
+         url('../fonts/Quicksand_Light-webfont.svg#QuicksandLight') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+@font-face {
+    font-family: 'Satellite';
+    src: url('../fonts/Satellite.otf');
+
+}
+@font-face {
+  font-family: 'Caudex';
+  src: local('Caudex'), url('../fonts/Caudex.woff') format('woff');
+}
+
+@import "media-queries.less";
+@import "helpers.less";
+@import "print.less";
