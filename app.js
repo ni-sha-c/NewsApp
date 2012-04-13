@@ -24,6 +24,8 @@ app.configure(function(){
                                }
                      });
   app.use(express.bodyParser());
+  app.use(express.cookieParser());
+  app.use(express.session({secret : "chromodynamics"}));
   app.use(express.methodOverride());
   app.use(app.router);
   app.use(express.static(__dirname + '/public'));
@@ -49,14 +51,11 @@ app.get('/', function (req, res)
     }
 
       );
-/*
-app.get('/:userid/post', function (req, res) {
-  wona.controller.newPost(req.params.userid);
-});
+app.get('/error', function (req, res)
+    {
+      res.render("404.html", {layout: false});
+    });
 
-app.get('/:userid/:postid/edit', function(req, res) {
-  wona.controller.editPost(req.params.userid, req.params.postid);
-});*/
 
 app.post('/login', function(req, res){
   console.log(req.body.username + "is trying to login!");
@@ -64,20 +63,25 @@ app.post('/login', function(req, res){
     username : String,
     password : String
     };
+  req.session.destroy(function(err) {
+    console.log("destroyed previous session!");
+    console.log(err);
+  });
   session.username =req.body.username;
   session.password= controller.hash(req.body.pass);
   exports.session = session;
   var callback = function ( data) {
-    var result= JSON.stringify(data);
-    var json = JSON.parse(result);
-    if(json==null||json[0]==null||json[0]==undefined)
+  
+    if(data==null||data==undefined)
 {
   console.log("Incorrect user!");
-  res.redirect('/login');
+  res.redirect('/login/retry');
 }
     else 
     {
       console.log("successfully logged in user: " + session.username);
+      req.session.username = session.username;
+      req.session.uid = data;
       res.redirect('/');
     }
   }
@@ -85,13 +89,20 @@ app.post('/login', function(req, res){
 
 
 });
-app.get('/login', function (req, res){
+app.get('/login/:y', function (req, res){
+          
+            console.log(req.params.y);
+                     
+        controller.error(req.params.y);
   res.render('login',{layout: false});
 });
 
-app.get('/signup', function (req, res){
+app.get('/signup/:y', function (req, res){
+  console.log(req.params.y);
+  controller.error(req.params.y);
   res.render('signup',{layout: false});
 });
+
 app.post('/signup', function (req, res){
   
   console.log(req.body.username + "  is tyring to sign up!");
@@ -102,6 +113,13 @@ app.post('/signup', function (req, res){
         var password = controller.hash(req.body.pass);
         console.log(password);
         var id = crypto.createHash('md5').update(req.body.username).digest('hex');
+        var session = {
+          username : String,
+          password : String
+        };
+          session.username = name;
+          session.password = password;
+        
         var callback = function (data)
           {
             if(data==null)
@@ -112,6 +130,8 @@ app.post('/signup', function (req, res){
             else {
 
               console.log("successfully signed in!");
+              res.session.username= name;
+              res.session.uid =id;
               res.redirect('/');
             }
           };
@@ -143,6 +163,12 @@ app.get('/post', function(req, res)
       //var Converter = require("./pagedown/Markdown.Converter.js").Converter;
         //  var converter = new Converter();
               //console.log(converter.makeHtml("**I am bold!**"));
+      //if(auth.getUserId()==null)
+        //  {
+          //  console.log("someone's pressed post without logging in!");
+            //res.redirect('/login',{layout: false});
+         // }
+      //else
       res.render('post.html',{layout: false});
       
 

@@ -21,7 +21,41 @@ controller.prototype = {
 
 
   insertNewUser : function (id, name, password,callback) {  
-client.query(
+
+     var flag =0;               
+    client.query('SELECT * FROM '+EDITOR_TABLE+' WHERE name=?',[name], function (err, results, fields) {
+                if(err==null)
+              {
+                
+                console.log(results);
+                var blue = JSON.stringify(results);
+                var json = JSON.parse(blue);
+                if(json==null||json==undefined)
+              {
+                console.log("This username is free!Inserting...");
+                
+              }
+                else
+              { 
+                console.log("this username already exists!redirecting...");
+               
+              var err = require("./../public/javascripts/error.js");
+              console.log(err.reason("uua")); 
+              flag =1;
+                callback(null);
+              }
+        
+              }
+              
+                else
+                console.log(err);
+              });
+
+
+
+      if(flag==0)
+      {
+      client.query(
       'INSERT INTO '+EDITOR_TABLE+' '+
         'SET id= ?, name = ?, password = ?, articles = ?',
           [id, name,password,null], function( err, info)
@@ -40,7 +74,7 @@ client.query(
             
     );
 
-
+      }
 
 },
 
@@ -63,7 +97,7 @@ client.query(
     login : function(session, callback) {
               var username = session.username;
               var password = session.password;
-              client.query('SELECT password FROM '+EDITOR_TABLE+' WHERE name=?',[username], function (err, results, fields) {
+              client.query('SELECT * FROM '+EDITOR_TABLE+' WHERE name=?',[username], function (err, results, fields) {
                 if(err==null)
               {
                 
@@ -77,7 +111,7 @@ client.query(
               }
                 else
               { if(json[0].password==password)
-                callback(results);
+                callback(json[0].id);
                 else 
               {
                 console.log("Passwords don't match!");
@@ -89,6 +123,15 @@ client.query(
                 console.log(err);
               });
             },
+
+
+    error : function(data)
+            {
+              var err = require("./../public/javascripts/error.js");
+              err.text = err.reason(data);
+              console.log(err.text);
+            },
+        
 
      post : function(id, title, author,contents,time,callback)
                 {

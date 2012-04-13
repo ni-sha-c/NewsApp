@@ -7,13 +7,8 @@ Ashwini Khare@SDSLabs
     * */
     
  $(document).ready(function(){
-	 $('.archive-scroll span').click(function(){
-			$('.archive-scroll').animate({
-					marginLeft:'-=444px'
-				},1000);
-		 })
-	 
-	 });
+	 $('#archive-scroll').bxSlider();	 
+ });
 
 
 
