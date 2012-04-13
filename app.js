@@ -75,7 +75,7 @@ app.post('/login', function(req, res){
     if(data==null||data==undefined)
 {
   console.log("Incorrect user!");
-  res.redirect('/login');
+  res.redirect('/login/retry');
 }
     else 
     {

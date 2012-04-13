@@ -128,7 +128,8 @@ controller.prototype = {
     error : function(data)
             {
               var err = require("./../public/javascripts/error.js");
-              console.log(err.reason(data));
+              err.text = err.reason(data);
+              console.log(err.text);
             },
         
 
