@@ -6,8 +6,7 @@ var express = require('express')
   , wona = require('./wona'),
   crypto = require('crypto'),
   controller = require('./wona/controller.js'),
-  MemoryStore = require('express/node_modules/connect').session.MemoryStore,
-  rj = require('http://cdn.sdslabs.co.in/cdnjs/ajax/libs/require.js/1.0.5/require.min.js');
+  MemoryStore = require('express/node_modules/connect').session.MemoryStore;
  // RedisStore = require('connect-redis')(express);
 var app = module.exports = express.createServer();
 
