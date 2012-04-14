@@ -5,7 +5,9 @@
 var express = require('express')
   , wona = require('./wona'),
   crypto = require('crypto'),
-  controller = require('./wona/controller.js');
+  controller = require('./wona/controller.js'),
+  MemoryStore = require('express/node_modules/connect').session.MemoryStore;
+ // RedisStore = require('connect-redis')(express);
 var app = module.exports = express.createServer();
 
 // Configuration
@@ -25,10 +27,11 @@ app.configure(function(){
                      });
   app.use(express.bodyParser());
   app.use(express.cookieParser());
-  app.use(app.router);
+  app.use(express.session({secret : "chromodynamics",store: new MemoryStore({reapInterval: 60000*10})}));
   app.use(express.static(__dirname + '/public'));
-  app.use(express.session({secret : "chromodynamics"}));
   app.use(express.methodOverride());
+  app.use(app.router);
+
 
 });
 
@@ -64,10 +67,10 @@ app.post('/login', function(req, res){
     username : String,
     password : String
     };
-  req.session.destroy(function(err) {
-    console.log("destroyed previous session!");
-    console.log(err);
-  });
+  //req.session.destroy(function(err) {
+    //console.log("destroyed previous session!");
+    //console.log(err);
+  //});
   session.username =req.body.username;
   session.password= controller.hash(req.body.pass);
   exports.session = session;
