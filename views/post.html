@@ -5,7 +5,7 @@
 <title>Post</title>
 <link rel="stylesheet" type="text/css" href="stylesheets/post.css" />
 <!-- jQuery -->
-<script type="text/javascript" src="http://code.jquery.com/jquery-1.6.2.min.js"></script>
+<script type="text/javascript" src="http://cdn.sdslabs.co.in/cdnjs/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
 <!-- markItUp! -->
 <script type="text/javascript" src="javascripts/latest/markitup/jquery.markitup.js"></script>
 <!-- markItUp! toolbar settings -->
@@ -46,7 +46,8 @@ $(document).ready(function()	{
 			$("span", this).text("remove Editor");
 		}
  		return false;
-	});
+                });
+        $('a[title="Preview"]').trigger('mouseup');
 });
 
 </script>

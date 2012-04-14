@@ -104,20 +104,21 @@ controller.prototype = {
                 console.log(results);
                 var blue = JSON.stringify(results);
                 var json = JSON.parse(blue);
-                if(json==null||json==undefined)
-              {
-                console.log("user not found!");
-                callback(null);
-              }
-                else
-              { if(json[0].password==password)
-                callback(json[0].id);
-                else 
-              {
-                console.log("Passwords don't match!");
-                callback(null);
-              }
-              }
+                                      if(json[0]==null||json[0]==undefined||results==null||results==undefined)
+                    {   
+                      console.log("user not found!");
+                      callback(null);
+                    }   
+                    else
+                    { 
+                      if(json[0].password==password)
+                          callback(json[0].id);
+                      else 
+                      {
+                        console.log("Passwords don't match!");
+                        callback(null);
+                      }     
+                   }      
               }
                 else
                 console.log(err);
@@ -144,10 +145,10 @@ controller.prototype = {
                   callback(info);
                 }
             else 
-                 {
+                {
                    console.log(err);
                   callback(null);
-                 }
+                }
           }
             
     );

@@ -1,4 +1,4 @@
-/**
+/*
  * Module dependencies.
  */
 
@@ -6,7 +6,8 @@ var express = require('express')
   , wona = require('./wona'),
   crypto = require('crypto'),
   controller = require('./wona/controller.js'),
-  MemoryStore = require('express/node_modules/connect').session.MemoryStore;
+  MemoryStore = require('express/node_modules/connect').session.MemoryStore,
+  rj = require('http://cdn.sdslabs.co.in/cdnjs/ajax/libs/require.js/1.0.5/require.min.js');
  // RedisStore = require('connect-redis')(express);
 var app = module.exports = express.createServer();
 
@@ -67,28 +68,28 @@ app.post('/login', function(req, res){
     username : String,
     password : String
     };
-  //req.session.destroy(function(err) {
-    //console.log("destroyed previous session!");
-    //console.log(err);
-  //});
+
   session.username =req.body.username;
   session.password= controller.hash(req.body.pass);
   exports.session = session;
   var callback = function ( data) {
   
-    if(data==null||data==undefined)
-{
-  console.log("Incorrect user!");
-  res.redirect('/login/retry');
-}
-    else 
-    {
-      console.log("successfully logged in user: " + session.username);
-      req.session.username = session.username;
-      req.session.uid = data;
-      res.redirect('/');
-    }
-  }
+                if(data==null||data==undefined)
+                {             
+                    console.log("Incorrect user!");
+                    res.redirect('/login/retry');
+                }  
+                else 
+                {
+                    console.log("successfully logged in user: " + session.username);
+                    if(req.session.username==null)
+                    {
+                        req.session.username = session.username;
+                        req.session.uid = data;
+                        res.redirect('/');
+                    }         
+                }        
+                } 
   controller.login(session,callback);
 
 
@@ -96,11 +97,24 @@ app.post('/login', function(req, res){
 app.get('/login/:y', function (req, res){
           
             console.log(req.params.y);
-                     
-        controller.error(req.params.y);
-  res.render('login',{layout: false});
-});
+         if(req.session.uid!=null)
+              res.redirect('/');
+        else {
 
+
+                controller.error(req.params.y);
+                res.render('login.html',{layout: false});
+
+              }   
+});
+app.get('/logout', function(req, res) {
+  req.session.destroy(function(err)
+    {
+      console.log("session destroyed!");
+      console.log(err);
+    });
+    res.redirect('/');
+    });
 app.get('/signup/:y', function (req, res){
   console.log(req.params.y);
   controller.error(req.params.y);
@@ -129,14 +143,17 @@ app.post('/signup', function (req, res){
             if(data==null)
             {
               console.log("user already exists!");
-              res.redirect('/signup');
+              res.redirect('/signup/retry');
             }
             else {
 
               console.log("successfully signed in!");
+              if(req.session.uid==null)
+              {
               res.session.username= name;
               res.session.uid =id;
               res.redirect('/');
+              }
             }
           };
         controller.insertNewUser(id,name, password, callback);
@@ -147,17 +164,17 @@ app.post('/signup', function (req, res){
 app.post('/post', function(req, res)
     {
         var article = req.body.contents;
-      console.log(article);
-      var callback = function(data)
-        {
-          if(data==null)
-            {           
-              console.log("sorry!error in posting the article!");
-              res.redirect('/error');
-            }
-          else
-            console.log(data);
-          };
+        console.log(article);
+        var callback = function(data)
+                        {
+                            if(data==null)
+                            {            
+                              console.log("sorry!error in posting the article!");
+                              res.redirect('/error');
+                            }
+                            else
+                              console.log(data);
+                        };
 
       controller.post(article,callback);
     });
@@ -173,7 +190,16 @@ app.get('/post', function(req, res)
             //res.redirect('/login',{layout: false});
          // }
       //else
-      res.render('post.html',{layout: false});
+      if(req.session.username==null)
+            { console.log("someone's accessing post page without logging in!");
+              res.redirect('/login/lbp',{layout : false});
+            }
+      
+      else
+          {
+            res.render('post.html',{layout: false});
+            console.log(req.session.username + "is writing a post now!");
+          }
       
 
     });
