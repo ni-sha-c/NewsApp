@@ -4,7 +4,9 @@ var crypto = require('crypto');
 var mysql = require('mysql');
 var DATABASE = 'wona';
 var EDITOR_TABLE = 'editor';
-var POST_TABLE='posts'
+var POST_TABLE='posts';
+var jsdom = require('jsdom'),
+    htmlparser=require('htmlparser');
 var client = mysql.createClient({
     user: 'root',
       password: 'hello',
@@ -134,29 +136,44 @@ controller.prototype = {
             },
         
 
-     post : function(id, title, author,contents,time,callback)
+     post : function(article,author,callback)
                 {
-                
-                client.query('INSERT INTO '+POST_TABLE+' '+'SET pid= ?, title = ?, author = ?,contents = ?,time = ?',[id, title, author, contents,time], function( err, info)
-          {
-             if(err==null)
-                {
-                  console.log("inserted new article: " + title); 
-                  callback(info);
-                }
-            else 
-                {
-                   console.log(err);
-                  callback(null);
-                }
-          }
+                        
+                        
+                          
+                        var findTitle = function (title,pid)
+                        { 
+                                 client.query('INSERT INTO '+POST_TABLE+' '+'SET pid= ?, title = ?, author = ?,contents = ?',[pid, title, author, article], function( err, info)
+                                    {
+                                      if(err==null)
+                                       { 
+                                          console.log("inserted new article: " + title); 
+                                          callback(info);
+                                      }
+                                      else 
+                                      {
+                                        console.log(err);
+                                        callback(null);
+                                      }
+                                    } 
             
-    );
+                                            );};
 
 
+                        jsdom.env(article, [ 'http://cdn.sdslabs.co.in/cdnjs/ajax/libs/jquery/1.7.1/jquery.min.js'], function (errors, window)
+                            {
+                              var title = window.$("h4").text();
+                              console.log("title of the post is : "+ window.$("h4").text());
+                             
+                              var pid = crypto.createHash('sha1').update(crypto.createHash('md5').update(title).digest('hex')).digest('hex');
+                              console.log(pid);  
+                              findTitle(title,pid);
 
-                
-                
+                            }
+                                );
+
+             
+              
                 
                 
                 

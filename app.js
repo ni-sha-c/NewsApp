@@ -51,7 +51,14 @@ app.configure('production', function(){
 
 app.get('/', function (req, res)
     {
-            res.render("index.html",{layout: false});
+      var callback = function(data)
+      {
+
+      controller.home(callback);
+      if(callback==null)
+          res.redirect('/error');
+      else
+      res.render("index.html",{layout: false});
     }
 
       );
@@ -174,8 +181,8 @@ app.post('/post', function(req, res)
                             else
                               console.log(data);
                         };
-
-      controller.post(article,callback);
+      
+      controller.post(article,req.session.username,callback);
     });
 
 app.get('/post', function(req, res)
