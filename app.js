@@ -49,23 +49,81 @@ app.configure('production', function(){
 */
 // Routes
 
-app.get('/', function (req, res)
+app.get('/islogged', function (req, res)
+    {
+        if(req.session.username==null)
+        {
+            var obj = {"username":null,"userid":null};
+            var json= JSON.stringify(obj);
+            res.send(json);
+        }
+        else
+        {
+              var obj = {"username":req.session.username, "userid" : req.session.uid};
+              var json = JSON.stringify(obj);
+              res.send(json);
+          }
+    });
+
+app.get('/', function(req, res)
+              {
+                res.render("index.html", {layout: false});
+              });
+          
+
+
+app.get('/post/all', function (req, res)
     {
       var callback = function(data)
       {
-
-      controller.home(callback);
-      if(callback==null)
+        if(data==null)
           res.redirect('/error');
-      else
-      res.render("index.html",{layout: false});
+        else
+          res.send(data);
+      };
+      controller.retreiveAllPosts(callback);
     }
 
       );
+app.get('/post/:number', function (req, res)
+    {
+      var number =0;
+      number = req.params.number;
+      var callback = function (data)
+                      {
+                        if(data==null)
+                            res.redirect('/error');
+                        else
+                            res.send(data);
+                      
+                      };
+      
+      controller.retreivePosts(number,callback);
+    });
 app.get('/error', function (req, res)
     {
       res.render("404.html", {layout: false});
     });
+
+app.get('/wonasds/:pid', function (req, res)
+                          {
+                              var pid = req.params.pid;
+                              var callback = function(data)
+                                              {
+                                                if(data==null)
+                                                {
+                                                  console.log("couldn't retreive post!");
+                                                  res.redirect('/error');
+                                                }
+                                                else
+                                                {
+                                                    res.send(data);
+                                                }
+                                              };
+                                controller.getPost(pid,callback);
+                          }
+        );
+                                
 
 
 app.post('/login', function(req, res){
@@ -156,8 +214,8 @@ app.post('/signup', function (req, res){
               console.log("successfully signed in!");
               if(req.session.uid==null)
               {
-              res.session.username= name;
-              res.session.uid =id;
+              req.session.username= name;
+              req.session.uid =id;
               res.redirect('/');
               }
             }
@@ -179,7 +237,10 @@ app.post('/post', function(req, res)
                               res.redirect('/error');
                             }
                             else
-                              console.log(data);
+                             {
+                               console.log(data);
+                               res.redirect('/');
+                             }
                         };
       
       controller.post(article,req.session.username,callback);

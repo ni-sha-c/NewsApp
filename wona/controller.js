@@ -22,6 +22,85 @@ var controller = function() {};
 controller.prototype = {
 
 
+  retreiveAllPosts : function (callback)
+  {
+         client.query('SELECT * FROM '+POST_TABLE+' ORDER BY time DESC', function (err, results, fields) {
+                if(err==null)
+              {
+                
+                //console.log(results);
+                var blue = JSON.stringify(results);
+                var json = JSON.parse(blue);
+                if(json[0]==null||json[0]==undefined)
+                  {
+                    console.log("Something's wrong with the posts table!");
+                    callback(null);
+                
+                  }
+                else
+                  { 
+                    console.log("phew!just retreived all the articles from the db");
+                    callback(json);
+                  }
+                       
+                  
+              } 
+        
+              
+              
+              else
+              {
+                              
+                  console.log(err);
+                  callback(null);
+              }
+        });
+
+
+
+  },          
+  
+  retreivePosts : function(number, callback)
+          {
+                  client.query('SELECT * FROM '+POST_TABLE+' ORDER BY time DESC LIMIT '+ number + ' ,5', function (err, results, fields) {
+                if(err==null)
+              {
+                
+                //console.log(results);
+                var blue = JSON.stringify(results);
+                var json = JSON.parse(blue);
+                if(json[0]==null||json[0]==undefined)
+                  {
+                    console.log("Something's wrong with the posts table!");
+                    callback(null);
+                
+                  }
+                else
+                  { 
+                    console.log("phew!just retreived some articles from the db");
+                    callback(json);
+                  }
+                       
+                  
+              } 
+        
+              
+              
+              else
+              {
+                              
+                  console.log(err);
+                  callback(null);
+              }
+        });
+            
+                  
+                                 
+    
+  
+  
+         }, 
+  
   insertNewUser : function (id, name, password,callback) {  
 
      var flag =0;               
@@ -80,19 +159,6 @@ controller.prototype = {
 
 },
 
- 
-   
-   /* supply_view : function(user, callback) {
-                 var callback = (typeof callback === 'function') ? callback : function() {};
-                  
-                     var data = {
-                             user ? user : 'nobody'
-                                  };
-                      
-                      view.renderView('view', data, function(data) {
-                                 callback(data);
-                                     });
-                           },*/
     hash: function hash(text){
                     return crypto.createHash('sha1').update(crypto.createHash('md5').update(text).digest('hex')).digest('hex');
                       },
@@ -177,7 +243,43 @@ controller.prototype = {
                 
                 
                 
-                }                    
+                },
+
+    getPost : function (pid,callback)
+              {
+                   client.query('SELECT * FROM '+POST_TABLE+' WHERE pid= ? ', [pid], function (err, results, fields) {
+                if(err==null)
+              {
+                
+                //console.log(results);
+                var blue = JSON.stringify(results);
+                var json = JSON.parse(blue);
+                if(json[0]==null||json[0]==undefined)
+                  {
+                    console.log("Something's wrong with the posts table!");
+                    callback(null);
+                
+                  }
+                else
+                  { 
+                    console.log("phew!just retreived specific article from the db");
+                    callback(json);
+                  }
+                       
+                  
+              } 
+        
+              
+              
+              else
+              {
+                              
+                  console.log(err);
+                  callback(null);
+              }
+        });
+  }
+
 
 };
  

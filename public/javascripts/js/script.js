@@ -1,14 +1,14 @@
 /* Author:
 Ashwini Khare@SDSLabs
 */
-/*$(document).ready(function(){
+$(document).ready(function(){
         var sudoSlider = $(".archive-scroll").sudoSlider();
     });
-    * */
     
- $(document).ready(function(){
+    
+/* $(document).ready(function(){
 	 $('#archive-scroll').bxSlider();	 
- });
+ });*/
 
 
 
