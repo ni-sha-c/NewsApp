@@ -4,6 +4,10 @@
   , "private": true
   , "dependencies": {
       "express": "2.5.8"
-    , "jade": ">= 0.0.1"
+    , "jade": "0.24.0",
+    "crypto" : "0.0.3",
+    "mysql" : "0.9.5",
+    "jsdom" : "0.2.14"
+
   }
 }

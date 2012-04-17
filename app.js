@@ -17,7 +17,7 @@ app.configure(function(){
   app.set('view engine', 'jade');
   app.set("view options", {layout: false});
 
-    // make a custom html template
+    //  a custom html template
   app.register('.html', {
           compile: function(str, options){
                            return function(locals){
