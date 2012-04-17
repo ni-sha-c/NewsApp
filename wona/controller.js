@@ -2,7 +2,7 @@
 var mysql = require('mysql');
 var crypto = require('crypto');
 var mysql = require('mysql');
-var DATABASE = 'wona';
+//var DATABASE = 'wona';
 var EDITOR_TABLE = 'editor';
 var POST_TABLE='posts';
 var jsdom = require('jsdom'),
@@ -14,7 +14,7 @@ var client = mysql.createClient({
 
 // If no callback is provided, any errors will be emitted as `'error'`
 // events by the client
-client.query('USE '+DATABASE);
+client.query('USE '+DATABASE_URL);
 //exports.insertNewUser= 
 
 var controller = function() {};
