@@ -6,9 +6,10 @@ Ashwini Khare@SDSLabs
 	 $('#archive-scroll').bxSlider();	
 	 $(window).scroll(function(){
 			var verticalPosition=$(window).scrollTop();
-			if(verticalPosition>50)
-				$('header').hide();
-		 }) 
+			//if(verticalPosition>50)
+				//hideMainhead();
+			
+		 }); 
 	var hideMainhead=function(){
 			$('.mainHead').hide();
 			$('.auxiliaryHead').fadeIn('slow');
