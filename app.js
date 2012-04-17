@@ -278,5 +278,9 @@ app.get('/post', function(req, res)
 
 
 
-app.listen(3000);
-console.log("Express server listening on port %d in %s mode", app.address().port, app.settings.env);
+
+var port = process.env.PORT || 3000;
+app.listen(port, function () {
+  console.log("listening on" + port);
+});
+
