@@ -5,8 +5,8 @@ var mysql = require('mysql');
 var DATABASE = 'wona';
 var EDITOR_TABLE = 'editor';
 var POST_TABLE='posts';
-var jsdom = require('jsdom'),
-    htmlparser=require('htmlparser');
+var jsdom = require('jsdom');
+    //htmlparser=require('htmlparser');
 var client = mysql.createClient({
     user: 'root',
       password: 'hello',
