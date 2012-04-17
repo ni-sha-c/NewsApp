@@ -182,7 +182,7 @@ app.get('/logout', function(req, res) {
 app.get('/signup/:y', function (req, res){
   console.log(req.params.y);
   controller.error(req.params.y);
-  res.render('signup',{layout: false});
+  res.render('signup.html',{layout: false});
 });
 
 app.post('/signup', function (req, res){

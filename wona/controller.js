@@ -62,7 +62,7 @@ controller.prototype = {
   
   retreivePosts : function(number, callback)
           {
-                  client.query('SELECT * FROM '+POST_TABLE+' ORDER BY time DESC LIMIT '+ number + ' ,5', function (err, results, fields) {
+                  client.query('SELECT * FROM '+POST_TABLE+' ORDER BY time DESC LIMIT '+ number*5 + ' ,5', function (err, results, fields) {
                 if(err==null)
               {
                 
