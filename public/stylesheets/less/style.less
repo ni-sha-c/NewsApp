@@ -33,7 +33,7 @@ div.container{
 	border-bottom:@containerBorder;
 	
 }
-header{
+.mainHead{
 	border-top:3px solid @footerBackground;
 	h4{
 			margin:5px;
@@ -50,10 +50,10 @@ header{
 		float:left;
 	}
 	.logo{
-		width:@PageWidth*0.3;
+		width:@PageWidth*0.4;
 		}
 	.archives{
-		width:@PageWidth*0.4;
+		width:@PageWidth*0.3;
 		overflow:hidden;
 		.archive-scroll{
 			width:@PageWidth*1;
@@ -69,6 +69,17 @@ header{
 				color:#454545;
 			}
 		}
+		.controls{
+			color:#000;
+			text-decoration:none;
+			float:right;
+		}
+		.previous{
+			.controls;
+		}
+		.next{
+			.controls;
+		}
 	}
 	.links{
 		height:100px;
@@ -79,7 +90,18 @@ header{
 			
 			li{
 				list-style:none;
-				
+				font-family:'Caudex';
+				margin:5px;
+				border-bottom:1px dotted #454545;
+				line-height:25px;
+				padding-left:10px;
+				a{
+					color:#000;
+					text-decoration:none;
+				}
+				a:hover{
+					color:@Blue;
+				}
 			}
 		}
 	}
@@ -100,6 +122,13 @@ header{
 	}
 	h4{	
 	}
+}
+.auxiliaryHead{
+	background:@footerBackground;
+	color:@Grey;
+	display:none;
+	position:fixed;
+	top:0px;
 }
 .shadow{
 	-webkit-box-shadow: 0px 3px 5px rgba(50, 50, 50, 0.3);
@@ -254,6 +283,26 @@ footer{
 	
 }
 
+ul{ 
+			margin:0;
+			padding:0;
+			
+			li{
+				list-style:none;
+				font-family:'Caudex';
+				margin:5px;
+				border-bottom:1px dotted #454545;
+				line-height:25px;
+				padding-left:10px;
+				a{
+					color:#000;
+					text-decoration:none;
+				}
+				a:hover{
+					color:@Blue;
+				}
+			}
+		}
 @font-face {
     font-family: 'QuicksandLight';
     src: url('../fonts/Quicksand_Light-webfont.eot');

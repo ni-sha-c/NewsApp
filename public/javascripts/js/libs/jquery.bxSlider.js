@@ -18,7 +18,7 @@
 		var defaults = {
 			mode: 'horizontal',									// 'horizontal', 'vertical', 'fade'
 			infiniteLoop: true,									// true, false - display first slide after last
-			hideControlOnEnd: false,						// true, false - if true, will hide 'next' control on last slide and 'prev' control on first
+			hideControlOnEnd: true,						// true, false - if true, will hide 'next' control on last slide and 'prev' control on first
 			controls: true,											// true, false - previous and next controls
 			speed: 500,													// integer - in ms, duration of time slide transitions will occupy
 			easing: 'swing',                    // used with jquery.easing.1.3.js - see http://gsgd.co.uk/sandbox/jquery/easing/ for available options
@@ -28,10 +28,10 @@
 			pagerLocation: 'bottom',						// 'bottom', 'top' - location of pager
 			pagerShortSeparator: '/',						// string - ex: 'of' pager would display 1 of 4
 			pagerActiveClass: 'pager-active',		// string - classname attached to the active pager link
-			nextText: 'next',										// string - text displayed for 'next' control
+			nextText: 'Next',										// string - text displayed for 'next' control
 			nextImage: '',											// string - filepath of image used for 'next' control. ex: 'images/next.jpg'
 			nextSelector: '.next',									// jQuery selector - element to contain the next control. ex: '#next'
-			prevText: 'prev',										// string - text displayed for 'previous' control
+			prevText: 'Previous',										// string - text displayed for 'previous' control
 			prevImage: '',											// string - filepath of image used for 'previous' control. ex: 'images/prev.jpg'
 			prevSelector: '.previous',									// jQuery selector - element to contain the previous control. ex: '#next'
 			captions: false,										// true, false - display image captions (reads the image 'title' tag)
@@ -50,7 +50,7 @@
 			stopImage: '',											// string - filepath of image used for 'stop' control. ex: 'images/stop.jpg'
 			ticker: false,											// true, false - continuous motion ticker mode (think news ticker)
 																					// note: autoControls, autoControlsSelector, and autoHover apply to ticker!
-			tickerSpeed: 5000,								  // float - use value between 1 and 5000 to determine ticker speed - the smaller the value the faster the ticker speed
+			tickerSpeed: 500,								  // float - use value between 1 and 5000 to determine ticker speed - the smaller the value the faster the ticker speed
 			tickerDirection: 'next',						// 'next', 'prev' - direction in which ticker show will traverse
 			tickerHover: false,                 // true, false - if true ticker will pause on mouseover
 			wrapperClass: 'bx-wrapper',					// string - classname attached to the slider wraper
@@ -80,7 +80,7 @@
 		var childrenWidth = '';
 		var childrenOuterWidth = '';
 		var wrapperWidth = '';
-		var wrapperHeight = '150';
+		var wrapperHeight = '120';
 		var $pager = '';	
 		var interval = '';
 		var $autoControls = '';
