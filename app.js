@@ -85,6 +85,10 @@ app.get('/post/all', function (req, res)
     }
 
       );
+app.get('/view', function (req, res)
+    {
+      res.render("article.html", {layout : false});
+    });
 app.get('/post/:number', function (req, res)
     {
       var number =0;

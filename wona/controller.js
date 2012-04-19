@@ -129,7 +129,10 @@ controller.prototype = {
               }
               
                 else
-                console.log(err);
+                {
+                  console.log(err);
+                  callback(null);
+                }
               });
 
 
@@ -226,7 +229,7 @@ controller.prototype = {
                                             );};
 
 
-                        jsdom.env(article, [ 'http://cdn.sdslabs.co.in/cdnjs/ajax/libs/jquery/1.7.1/jquery.min.js'], function (errors, window)
+                        jsdom.env(article, [ './../public/javascripts/js/libs/jquery-1.7.1.min.js'], function (errors, window)
                             {
                               var title = window.$("h4").text();
                               console.log("title of the post is : "+ window.$("h4").text());
