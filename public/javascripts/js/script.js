@@ -19,9 +19,15 @@ Ashwini Khare@SDSLabs
 			$('.mainHead').fadeIn('slow');
 		}
 $.ajax({
-	url:'/post/wonasds/json1.pid',
+	url:'/post/0',
 	success:function(data){
 		console.log(data);
+		for(i in data){
+			var contents="<a href='/view/"+data[i].pid+"'><h1>"+data[i].title+'</h1></a>';
+				contents+='<p>'+data[i].contents+'</p>';
+				contents+="<div class='author'>by "+data[i].author+" @ "+data[i].time+"</div>";
+			$('.articles-scroll').append(contents);	
+			}
 		}
 	});
  });
