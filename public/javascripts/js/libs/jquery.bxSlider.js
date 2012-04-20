@@ -90,7 +90,7 @@
 		var autoPlaying = true;
 		var loaded = false;
 		var childrenMaxWidth = 0;
-		var childrenMaxHeight = 150;
+		var childrenMaxHeight = 120;
 		var currentSlide = 0;	
 		var origLeft = 0;
 		var origTop = 0;

@@ -2,14 +2,14 @@
 var mysql = require('mysql');
 var crypto = require('crypto');
 var mysql = require('mysql');
-var DATABASE = 'wona';
+var DATABASE = 'WonaNewsApp';
 var EDITOR_TABLE = 'editor';
 var POST_TABLE='posts';
 var jsdom = require('jsdom');
     //htmlparser=require('htmlparser');
 var client = mysql.createClient({
-    user: 'root',
-      password: 'hello',
+		user: 'root',
+      password: 'ash_mysql',
 });
 
 // If no callback is provided, any errors will be emitted as `'error'`

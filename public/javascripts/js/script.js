@@ -18,7 +18,14 @@ Ashwini Khare@SDSLabs
 			$('.auxiliaryHead').hide();
 			$('.mainHead').fadeIn('slow');
 		}
+$.ajax({
+	url:'/post/wonasds/json1.pid',
+	success:function(data){
+		console.log(data);
+		}
+	});
  });
+ 
 
 
 
