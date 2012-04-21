@@ -198,8 +198,8 @@ app.get('/logout', function(req, res) {
     res.redirect('/');
     });
 app.get('/signup/:y', function (req, res){
-  console.log(req.params.y);
-  controller.error(req.params.y);
+  //console.log(req.params.y);
+  //controller.error(req.params.y);
   res.render('signup.html',{layout: false});
 });
 
@@ -211,21 +211,15 @@ app.post('/signup', function (req, res){
                                             }*/
         var name= req.body.username;
         var password = controller.hash(req.body.pass);
-        console.log(password);
+        //console.log(password);
         var id = crypto.createHash('md5').update(req.body.username).digest('hex');
-        var session = {
-          username : String,
-          password : String
-        };
-          session.username = name;
-          session.password = password;
         
         var callback = function (data)
           {
-            if(data==null)
+            if(data!="success")
             {
               console.log("user already exists!");
-              res.redirect('/signup/retry');
+              res.redirect('/signup/nu');
             }
             else {
 

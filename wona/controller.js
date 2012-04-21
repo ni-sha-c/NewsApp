@@ -2,14 +2,14 @@
 var mysql = require('mysql');
 var crypto = require('crypto');
 var mysql = require('mysql');
-var DATABASE = 'WonaNewsApp';
+var DATABASE = 'wona';
 var EDITOR_TABLE = 'editor';
 var POST_TABLE='posts';
 var jsdom = require('jsdom');
     //htmlparser=require('htmlparser');
 var client = mysql.createClient({
 		user: 'root',
-      password: 'ash_mysql',
+      password: 'hello',
 });
 
 // If no callback is provided, any errors will be emitted as `'error'`
@@ -102,65 +102,72 @@ controller.prototype = {
          }, 
   
   insertNewUser : function (id, name, password,callback) {  
+        
 
-     var flag =0;               
+    var text = null;                
     client.query('SELECT * FROM '+EDITOR_TABLE+' WHERE name=?',[name], function (err, results, fields) {
                 if(err==null)
               {
                 
-                console.log(results);
+                console.log("results are: " + results);
                 var blue = JSON.stringify(results);
                 var json = JSON.parse(blue);
-                if(json==null||json==undefined)
+                console.log("json is : "+json);
+                if(json[0]==null||json[0]==undefined)
               {
-                console.log("This username is free!Inserting...");
+                      console.log("This username is free!Inserting...");
+                      client.query('INSERT INTO '+EDITOR_TABLE+' '+'SET id= ?, name = ?, password = ?, articles = ?',[id, name,password,null],        function(err, info)
+          {
+                     if(err==null)
+                    {
+                        console.log("inserted new user: " + name); 
+                        text ="success";
+                    }
+                    else 
+                        console.log(err);
+                  
+                 
+  
+          }
+          );
+
+
                 
               }
                 else
-              { 
+            
                 console.log("this username already exists!redirecting...");
                
-              var err = require("./../public/javascripts/error.js");
-              console.log(err.reason("uua")); 
-              flag =1;
-                callback(null);
-              }
+             // var err = require("./../public/javascripts/error.js");
+             // console.log(err.reason("uua")); 
+              
+            
         
               }
               
                 else
-                {
-                  console.log(err);
-                  callback(null);
-                }
+                
+                  console.log(err); 
               });
-
-
-
-      if(flag==0)
-      {
-      client.query(
-      'INSERT INTO '+EDITOR_TABLE+' '+
-        'SET id= ?, name = ?, password = ?, articles = ?',
-          [id, name,password,null], function( err, info)
-          {
-             if(err==null)
-                {
-                  console.log("inserted new user: " + name); 
-                  callback(info);
-                }
-            else 
-                 {
-                   console.log(err);
-                  callback(null);
-                 }
-          }
+              
+              
+              setTimeout(function () {
+                  console.log("end of if. ");
             
-    );
+                  if(text=="success")
+                  {
+                      console.log("calling back with success");
+                      callback("success");
+                  }
+                  else
+                  {
+                      console.log("calling back with null");
+                      callback(null);
+                  }
+              }, 1000);
+      },
 
-      }
 
-},
 
     hash: function hash(text){
                     return crypto.createHash('sha1').update(crypto.createHash('md5').update(text).digest('hex')).digest('hex');
