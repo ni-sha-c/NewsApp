@@ -6,7 +6,8 @@ var express = require('express')
   , wona = require('./wona'),
   crypto = require('crypto'),
   controller = require('./wona/controller.js'),
-  MemoryStore = require('express/node_modules/connect').session.MemoryStore;
+  MemoryStore = require('express/node_modules/connect').session.MemoryStore,
+  fs= require('fs');
  // RedisStore = require('connect-redis')(express);
 var app = module.exports = express.createServer();
 
@@ -43,6 +44,7 @@ app.configure('production', function(){
   app.use(express.errorHandler());
 });
 
+
 /*hash: function hash(text){
     return crypto.createHash('sha1').update(crypto.createHash('md5').update(text).digest('hex')).digest('hex');
       }
@@ -53,23 +55,171 @@ app.get('/islogged', function (req, res)
     {
         if(req.session.username==null)
         {
-            var obj = {"username":null,"userid":null};
+            var obj = [{"username":null,"userid":null}];
             var json= JSON.stringify(obj);
+            console.log(json['username']);
             res.send(json);
         }
         else
         {
-              var obj = {"username":req.session.username, "userid" : req.session.uid};
+              var obj = [{"username":req.session.username, "userid" : req.session.uid}];
               var json = JSON.stringify(obj);
+              var blah = '';
+              blah = blah +json;
+              blah = JSON.parse(blah);
+              console.log("username is : " +blah['username']);
               res.send(json);
           }
     });
 
 app.get('/', function(req, res)
               {
-                res.render("index.html", {layout: false});
+                req.session.page=0;
+                req.session.nop=0;
+                var number = 0, nop=0;
+                var callback = function (data) { 
+                  
+                  if(data==null || data==undefined)
+                      console.log("error setting the maximum no of pages cookie!");
+                  else
+                      {
+                        nop = 0 + data[0]['COUNT(pid)'];  
+                        console.log("number of posts = " + nop);
+                      }
+                  };
+                  controller.findNumber(callback);
+                    console.log("setting max no of pages cookie...");
+                             
+                        fs.writeFile('./public/javascripts/js/script.js',                                                            
+                                           "$(document).ready(function(){  $.ajax({ url:'/post/"+ number +"' , success:function(blue){ console.log(blue);for(var i=0;i<5;i++){ var contents=\"<a  href='\"+ \"/view/\" + blue[i].pid+ \"' ><h1>\" + blue[i].title+ \"</h1></a>\";contents+=\"<p>\"+blue[i].contents+\"</p>\"; contents+=\"<div class=\'author\'>by\" + blue[i].author+ \"on\"+blue[i].time+\"</div>\"; $(\".articles-scroll\").append(contents);} } });});"  , function(err)                                            
+                                                  {
+                                                    if(err)
+                                                      {
+                                                        console.log("error writing script file");
+                                                        res.redirect('/error');
+                                                        res.end();
+                                                      }
+                                                    else
+                                                    {
+                                                        console.log("successfully wrote script file");
+                                                    }
+                                                  });
+                    setTimeout( function () {
+                    req.session.nop = Math.floor(nop/5);
+                    console.log("The maximum number of pages= " + req.session.nop);
+                    },500);
+      
+                res.render("index.html",{layout: false}); 
+                
               });
-          
+app.get('/view', function(req,res)
+              {
+                res.render("index.html",{layout: false});
+              });
+app.post('/view/newer', function (req, res)
+                  {
+                   
+              
+            var number=0;
+            console.log("the session variable is " + req.session.page);
+            number  = number+ req.session.page-1;
+            console.log("the requested page is " + number);
+            if(number==-1)
+                number=0;
+            else
+              req.session.page= req.session.page-1;
+                                          fs.writeFile('./public/javascripts/js/script.js',                                                            
+                                           "$(document).ready(function(){  $.ajax({ url:'/post/"+ number +"' , success:function(blue){ console.log(blue);for(var i=0;i<5;i++){ var contents=\"<a  href='\"+ \"/view/\" + blue[i].pid+ \"' ><h1>\" + blue[i].title+ \"</h1></a>\";contents+=\"<p>\"+blue[i].contents+\"</p>\"; contents+=\"<div class=\'author\'>by\" + blue[i].author+ \"on\"+blue[i].time+\"</div>\"; $(\".articles-scroll\").append(contents);} } });});"  , function(err)                                            
+                                                  {
+                                                    if(err)
+                                                      {
+                                                        console.log("error writing script file");
+                                                        res.redirect('/error');
+                                                        res.end();
+                                                      }
+                                                    else
+                                                    {
+                                                        console.log("successfully wrote script file");
+                                          
+                                                        }
+
+                                                    }
+                                                  );
+                                          setTimeout( function () {
+                                                                
+                                                                res.redirect('/view');
+                                                                  },20);
+                                              
+                                          
+
+                                          
+                                    
+                                      
+                                        
+                  });
+
+
+
+app.post('/view/older', function (req, res)
+                  {
+                   
+              
+            var number=0;
+            console.log("the session variable is " + req.session.page);
+            number  = number+ req.session.page +1;
+            var nop=0;
+            console.log("the page that is requested is " + number);
+                         var minorCallback = function (data) { 
+                  
+                  if(data==null || data==undefined)
+                      console.log("error setting the maximum no of pages cookie!");
+                  else
+                      {
+                        nop = 0 + data[0]['COUNT(pid)'];  
+                        console.log("number of posts = " + nop);
+                      }
+                  };
+                  controller.findNumber(minorCallback);
+                    console.log("setting max no of pages cookie...");
+                
+              setTimeout( function () {      
+                  req.session.nop = 0 + Math.floor(nop/5);
+                console.log("maximum number of pages: " + req.session.nop);
+            if(number==req.session.nop+1)
+                  { console.log("Came around a circle to the first page!");
+                    number=0;
+                    req.session.page=0;
+                  }
+            else
+            {
+              req.session.page= req.session.page+1;
+            }
+
+      
+                                          fs.writeFile('./public/javascripts/js/script.js',                                                            
+                                           "$(document).ready(function(){  $.ajax({ url:'/post/"+ number +"' , success:function(blue){ console.log(blue);for(var i=0;i<5;i++){ var contents=\"<a  href='\"+ \"/view/\" + blue[i].pid+ \"' ><h1>\" + blue[i].title+ \"</h1></a>\";contents+=\"<p>\"+blue[i].contents+\"</p>\"; contents+=\"<div class=\'author\'>by\" + blue[i].author+ \"on\"+blue[i].time+\"</div>\"; $(\".articles-scroll\").append(contents);} } });});"  , function(err)                                            
+                                                  {
+                                                    if(err)
+                                                      {
+                                                        console.log("error writing script file");
+                                                        res.redirect('/error');
+                                                        res.end();
+                                                      }
+                                                    else
+                                                    {
+                                                        console.log("successfully wrote script file");
+                                                        
+                                                    }
+
+                                                    }
+                                                  ); 
+              },10);              
+                                          setTimeout( function () {
+                                                                
+                                                                res.redirect('/view');
+                                                                  },20);
+           
+                  });
 
 
 app.get('/post/all', function (req, res)
@@ -85,10 +235,11 @@ app.get('/post/all', function (req, res)
     }
 
       );
-app.get('/view', function (req, res)
-    {
-      res.render("article.html", {layout : false});
-    });
+
+      
+  
+      
+
 //Experimenting for individual articles page
 app.get('/view/:pid',function(req,res){
 	var pid = req.params.pid;
@@ -122,28 +273,7 @@ app.get('/error', function (req, res)
     {
       res.render("404.html", {layout: false});
     });
-
-app.get('/wonasds/:pid', function (req, res)
-                          {
-                              var pid = req.params.pid;
-                              var callback = function(data)
-                                              {
-                                                if(data==null)
-                                                {
-                                                  console.log("couldn't retreive post!");
-                                                  res.redirect('/error');
-                                                }
-                                                else
-                                                {
-                                                    res.send(data);
-                                                }
-                                              };
-                                controller.getPost(pid,callback);
-                          }
-        );
                                 
-
-
 app.post('/login', function(req, res){
   console.log(req.body.username + "is trying to login!");
   var session = {
@@ -258,7 +388,7 @@ app.post('/post', function(req, res)
       controller.post(article,req.session.username,callback);
     });
 
-app.get('/post', function(req, res)
+app.get('/write', function(req, res)
     {
       //var Converter = require("./pagedown/Markdown.Converter.js").Converter;
         //  var converter = new Converter();

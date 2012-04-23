@@ -16,11 +16,42 @@
 	<link rel="stylesheet/less" href="stylesheets/less/style.less">
         <script src="javascripts/js/libs/less-1.2.1.min.js"></script>
         <script type="text/javascript" src="javascripts/js/libs/jquery-1.7.1.min.js"></script>
+        <style type="text/css">
+              .text-button 
+                  { 
+                          background-color: Transparent;                 
+                          text-decoration: underline;                 
+                          color: blue;
+                          cursor: pointer; 
+                          border:0
+                  }    
+        </style>
         <script type="text/javascript">
+          
+           $(document).ready(function(){
+	 $('#archive-scroll').bxSlider();	
+	 $(window).scroll(function(){
+			var verticalPosition=$(window).scrollTop();
+			//if(verticalPosition>50)
+				//hideMainhead();
+			
+		 }); 
+	var hideMainhead=function(){
+			$('.mainHead').hide();
+			$('.auxiliaryHead').fadeIn('slow');
+		}
+	var hideAuxiliaryhead=function(){
+			$('.auxiliaryHead').hide();
+			$('.mainHead').fadeIn('slow');
+		}
+             });   
+
+
+          
           $(function() {
                           $.get("/islogged", function(data)
                             {
-                                        console.log(data['userid']);
+                                        console.log(data['username']);
                                         if(data[0].username==null)
                                         {
                                         $("#linkList").append("<li><a href='http://wona.co.in/blog/?page_id=21'>Submit a Story</a></li><li><a href='/login/nu'>Are you part of WONA? Login here or </a></li><li><a href='/signup/nu'>Sign up here!</a></li>");
@@ -55,15 +86,15 @@
 		
 		<div id="archive-scroll">
 			<div>
-				<img src="images/dec-2011.jpg">
+                          <a href="http://www.wona.co.in/?option=com_rubberdoc&view=category&id=27%3A2011&Itemid=42"><img src="images/dec-2011.jpg"></a>
 				<span>December 2011</span>
 			</div>
 			<div>
-				<img src="images/sep-2011.gif">
+			      <a href="http://www.wona.co.in/?option=com_rubberdoc&view=category&id=27%3A2011&Itemid=42"><img src="images/sep-2011.gif"></a>
 				<span>September 2011</span>
 			</div>
 			<div>
-				<img src="images/april-2011.gif">
+                          <a href="http://www.wona.co.in/?option=com_rubberdoc&view=category&id=27%3A2011&Itemid=42"><img src="images/april-2011.gif"></a>
 				<span>April 2011</span>
 			</div>
 			
@@ -114,7 +145,8 @@
 			Sri Mangu Singh, a UoR alumnus, is to take over as the new Managing Director of Delhi Metro Rail Corporation from January 1, 2012 as E. Sreedharan, the 'Metro Man', finally hangs up his boots after serving as the Delhi Metro Chief for 15 years.
 			Sri Mangu has been serving as the Director (Works) DMRC since 2002.
 		</p>-->
-	</div>
+              </div>
+                        
 	<div class="auxiliary-block">
 		<h3>Wona Blog</h3>
 		<div class='blog-listing'>
@@ -133,6 +165,18 @@
 </div>
 
 <footer>
+<div class="form">
+          <form method="post" action='/view/older' name="pageform">
+            <input type="submit" class="text-button"  name="page" value="Older Posts"/>
+          </form>
+          <form method="post" action='/view/newer'>
+            <input type="submit" class="text-button" style="float:right" name="previous" value="Newer Posts"/>
+          </form>
+
+
+          </div>
+
+
 <div class="footer-note">
 	&copy; WatchOut News Agency
 </div>
