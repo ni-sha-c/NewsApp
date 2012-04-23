@@ -9,7 +9,7 @@ var jsdom = require('jsdom');
     //htmlparser=require('htmlparser');
 var client = mysql.createClient({
 		user: 'root',
-      password: 'hello',
+      password: 'ash_mysql',
 });
 
 // If no callback is provided, any errors will be emitted as `'error'`
