@@ -58,8 +58,29 @@ controller.prototype = {
 
 
 
-  },          
-  
+  },
+
+  findNumber : function(callback)
+  {
+    
+             client.query('SELECT COUNT(pid) FROM '+POST_TABLE, function (err, results) {
+                if(err==null)
+              {
+                callback(results);
+                  
+              } 
+        
+              
+              
+              else
+              {
+                              
+                  console.log(err);
+                  callback(null);
+              }
+        });
+
+  }, 
   retreivePosts : function(number, callback)
           {
                   client.query('SELECT * FROM '+POST_TABLE+' ORDER BY time DESC LIMIT '+ number*5 + ' ,5', function (err, results, fields) {
