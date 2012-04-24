@@ -1,1 +1,0 @@
-$(document).ready(function(){  $.ajax({ url:'/post/2' , success:function(blue){ console.log(blue);for(var i=0;i<5;i++){ var contents="<a  href='"+ "/view/" + blue[i].pid+ "' ><h1>" + blue[i].title+ "</h1></a>";contents+="<p>"+blue[i].contents+"</p>"; contents+="<div class='author'>by" + blue[i].author+ "on"+blue[i].time+"</div>"; $(".articles-scroll").append(contents);} } });});
