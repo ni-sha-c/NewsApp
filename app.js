@@ -196,23 +196,29 @@ app.get('/post/all', function (req, res)
 
       );
 
-      
+ app.get('/article/:pid', function (req, res)
+    {
+      var pid = req.params.pid;
+      var callback = function(data)
+      {
+        if(data==null)
+          res.redirect('/error');
+        else
+          res.send(data);
+      };
+      controller.getPost(pid,callback);
+    }
+
+      );
+
+     
   
       
 
 //Experimenting for individual articles page
 app.get('/view/:pid',function(req,res){
 	var pid = req.params.pid;
-	var callback = function(data){
-		if(data==null){
-		  console.log("couldn't retreive post!");
-		  res.redirect('/error');
-		}
-		else{
-			res.send(data);
-		}
-	};
-	controller.getPost(pid,callback);
+	res.render("article.ejs", {layout: false, locals:{ pid: pid}});
 	});
 app.get('/post/:number', function (req, res)
     {
