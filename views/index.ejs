@@ -47,8 +47,8 @@
              });   
 
            $(document).ready(function(){  $.ajax({ url:'/post/<%= cpage %>' , success:function(blue){ 
-                 console.log(blue);
-                 console.log($(".articles-scroll").html());
+                 
+                 //console.log($(".articles-scroll").html());
                  var contents=null;
                  for(var i=0;i<5;i++)
                  {
@@ -56,25 +56,28 @@
        contents="<a  href='"+ "/view/" + blue[i].pid+ "' ><h1>" + blue[i].title+ "</h1></a>";
       contents+="<p>"+blue[i].contents+"</p>"; 
       contents+="<div class='author'>by " + blue[i].author+ "  on  "+blue[i].time+"</div>"; 
-      console.log($(".articles-scroll").html());
+      //console.log($(".articles-scroll").html());
       $(".articles-scroll").append(contents);
       } 
       } 
       });
     });
           
-          $(function() {
-                          $.get("/islogged", function(data)
+          $(document).ready(function(){
+              
+              $.ajax({url: "/islogged", success: function(data)
                             {
-                                        console.log(data[0]['username']);
-                                        if(data[0].username==null)
+
+                                        var json= jQuery.parseJSON(data);
+                                        console.log(json[0].username);
+                                        if(json[0].username==null)
                                         {
                                         $("#linkList").append("<li><a href='http://wona.co.in/blog/?page_id=21'>Submit a Story</a></li><li><a href='/login/nu'>Are you part of WONA? Login here or </a></li><li><a href='/signup/nu'>Sign up here!</a></li>");
                                         }
                                         else
-                                        $("#linkList").append("<li><a href='http://wona.co.in/blog/?page_id=21'>Submit a Story</a></li><li><a href='/logout'>Logout</a></li>");                        
-
-                                        });
+                                        $("#linkList").append("<li><a href='http://wona.co.in/blog/?page_id=21'>Submit a blog post to the Wona Blog</a></li><li><a href='/write'>Post an Article here!</a></li><li><a href='/logout'>Logout</a></li>");                        
+                                     
+                                        }});
                           });
                         </script>
 	<!-- Use SimpLESS (Win/Linux/Mac) or LESS.app (Mac) to compile your .less files

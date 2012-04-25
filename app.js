@@ -56,9 +56,12 @@ app.get('/islogged', function (req, res)
     {
         if(req.session.username==null)
         {
-            var obj = [{"username":null,"userid":null}];
+            var obj = [
+                        {"username":null
+                        ,"userid":null}
+                      ];
             var json= JSON.stringify(obj);
-            console.log(json['username']);
+            console.log(json[0]['username']);
             res.send(json);
         }
         else
@@ -73,7 +76,7 @@ app.get('/islogged', function (req, res)
               var blah = '';
               blah = blah +json;
               blah = JSON.parse(blah);
-              console.log("username is : " +blah['username']);
+              console.log("username is : " +blah[0]['username']);
               res.send(json);
           }
     });
