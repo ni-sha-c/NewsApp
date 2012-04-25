@@ -1,0 +1,266 @@
+info it worked if it ends with ok
+verbose cli [ 'node',
+verbose cli   '/home/ashwini/.nvm/v0.4.11/bin/npm',
+verbose cli   'install',
+verbose cli   'runjs' ]
+info using npm@1.0.106
+info using node@v0.4.11
+verbose config file /home/ashwini/.npmrc
+verbose config file /home/ashwini/.nvm/v0.4.11/etc/npmrc
+verbose config file /home/ashwini/.nvm/v0.4.11/lib/node_modules/npm/npmrc
+silly testEngine { name: 'jade',
+silly testEngine   description: 'Jade template engine',
+silly testEngine   version: '0.24.0',
+silly testEngine   author: 
+silly testEngine    { name: 'TJ Holowaychuk',
+silly testEngine      email: 'tj@vision-media.ca' },
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/visionmedia/jade.git' },
+silly testEngine   main: './index.js',
+silly testEngine   bin: { jade: './bin/jade' },
+silly testEngine   man: [ './jade.1' ],
+silly testEngine   dependencies: { commander: '0.5.2', mkdirp: '0.3.0' },
+silly testEngine   devDependencies: 
+silly testEngine    { mocha: '*',
+silly testEngine      'coffee-script': '*',
+silly testEngine      markdown: '*',
+silly testEngine      stylus: '*',
+silly testEngine      uubench: '*',
+silly testEngine      should: '*',
+silly testEngine      less: '*',
+silly testEngine      'uglify-js': '*' },
+silly testEngine   scripts: { prepublish: 'npm prune' },
+silly testEngine   engines: { node: '>= 0.1.98' },
+silly testEngine   _id: 'jade@0.24.0',
+silly testEngine   optionalDependencies: {},
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.106',
+silly testEngine   _nodeVersion: 'v0.4.11',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   _from: 'jade@>= 0.0.1' }
+verbose caching /home/ashwini/projects/WonaNewsApp/node_modules/jade/package.json
+silly testEngine { name: 'mysql',
+silly testEngine   version: '0.9.5',
+silly testEngine   author: 
+silly testEngine    { name: 'Felix Geisendörfer',
+silly testEngine      email: 'felix@debuggable.com',
+silly testEngine      url: 'http://debuggable.com/' },
+silly testEngine   description: 'A pure node.js JavaScript Client implementing the MySQL protocol.',
+silly testEngine   homepage: 'https://github.com/felixge/node-mysql',
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/felixge/node-mysql.git' },
+silly testEngine   main: './index',
+silly testEngine   scripts: { test: 'make test' },
+silly testEngine   dependencies: { hashish: '0.0.4' },
+silly testEngine   devDependencies: { gently: '0.8.0', urun: '0.0.4', utest: '0.0.3' },
+silly testEngine   engines: { node: '*' },
+silly testEngine   _id: 'mysql@0.9.5',
+silly testEngine   optionalDependencies: {},
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.106',
+silly testEngine   _nodeVersion: 'v0.4.11',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   _from: 'mysql' }
+verbose caching /home/ashwini/projects/WonaNewsApp/node_modules/mysql/package.json
+silly testEngine { name: 'express',
+silly testEngine   description: 'Sinatra inspired web development framework',
+silly testEngine   version: '2.5.8',
+silly testEngine   author: 
+silly testEngine    { name: 'TJ Holowaychuk',
+silly testEngine      email: 'tj@vision-media.ca' },
+silly testEngine   contributors: 
+silly testEngine    [ { name: 'TJ Holowaychuk',
+silly testEngine        email: 'tj@vision-media.ca' },
+silly testEngine      { name: 'Aaron Heckmann',
+silly testEngine        email: 'aaron.heckmann+github@gmail.com' },
+silly testEngine      { name: 'Ciaran Jessup', email: 'ciaranj@gmail.com' },
+silly testEngine      { name: 'Guillermo Rauch', email: 'rauchg@gmail.com' } ],
+silly testEngine   dependencies: 
+silly testEngine    { connect: '1.x',
+silly testEngine      mime: '1.2.4',
+silly testEngine      qs: '0.4.x',
+silly testEngine      mkdirp: '0.3.0' },
+silly testEngine   devDependencies: 
+silly testEngine    { 'connect-form': '0.2.1',
+silly testEngine      ejs: '0.4.2',
+silly testEngine      expresso: '0.9.2',
+silly testEngine      hamljs: '0.6.x',
+silly testEngine      jade: '0.16.2',
+silly testEngine      stylus: '0.13.0',
+silly testEngine      should: '0.3.2',
+silly testEngine      'express-messages': '0.0.2',
+silly testEngine      'node-markdown': '>= 0.0.1',
+silly testEngine      'connect-redis': '>= 0.0.1' },
+silly testEngine   keywords: [ 'framework', 'sinatra', 'web', 'rest', 'restful' ],
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/visionmedia/express.git' },
+silly testEngine   main: 'index',
+silly testEngine   bin: { express: './bin/express' },
+silly testEngine   scripts: { test: 'make test', prepublish: 'npm prune' },
+silly testEngine   engines: { node: '>= 0.4.1 < 0.7.0' },
+silly testEngine   _id: 'express@2.5.8',
+silly testEngine   optionalDependencies: {},
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.106',
+silly testEngine   _nodeVersion: 'v0.4.11',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   _from: 'express@2.5.8' }
+verbose caching /home/ashwini/projects/WonaNewsApp/node_modules/express/package.json
+silly testEngine { name: 'crypto',
+silly testEngine   id: 'crypto',
+silly testEngine   version: '0.0.3',
+silly testEngine   description: 'JavaScript implementations of standard and secure cryptographic algorithms.',
+silly testEngine   keywords: [ 'crypto', 'md5', 'sha1' ],
+silly testEngine   author: 
+silly testEngine    { name: 'Irakli Gozalishvili',
+silly testEngine      email: 'rfobic@gmail.com' },
+silly testEngine   repository: 
+silly testEngine    { type: 'git',
+silly testEngine      url: 'git://github.com/Gozala/crypto.git',
+silly testEngine      web: 'https://github.com/Gozala/crypto' },
+silly testEngine   bugs: { url: 'http://github.com/Gozala/crypto/issues/' },
+silly testEngine   devDependencies: { test: '>=0.0.10' },
+silly testEngine   directories: { lib: './' },
+silly testEngine   scripts: { test: 'node test/test-crypto.js' },
+silly testEngine   licenses: 
+silly testEngine    [ { type: 'BSD',
+silly testEngine        url: 'http://pajhome.org.uk/site/legal.html#bsdlicense' } ],
+silly testEngine   _id: 'crypto@0.0.3',
+silly testEngine   dependencies: {},
+silly testEngine   optionalDependencies: {},
+silly testEngine   engines: { node: '*' },
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.106',
+silly testEngine   _nodeVersion: 'v0.4.11',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   dist: { shasum: '8d2092cf3f31999a5d0718bb101240e8bc29773e' },
+silly testEngine   _from: 'crypto' }
+verbose caching /home/ashwini/projects/WonaNewsApp/node_modules/crypto/package.json
+silly testEngine { name: 'jsdom',
+silly testEngine   version: '0.2.14',
+silly testEngine   description: 'A javascript implementation of the W3C DOM',
+silly testEngine   keywords: [ 'dom', 'w3c', 'javascript' ],
+silly testEngine   maintainers: 
+silly testEngine    [ { name: 'Elijah Insua',
+silly testEngine        email: 'tmpvar@gmail.com',
+silly testEngine        url: 'http://tmpvar.com' } ],
+silly testEngine   contributors: 
+silly testEngine    [ { name: 'Vincent Greene',
+silly testEngine        email: 'ulteriorlife@gmail.com' },
+silly testEngine      { name: 'Dav Glass', email: 'davglass@gmail.com' },
+silly testEngine      { name: 'Felix Gnass', email: 'fgnass@gmail.com' },
+silly testEngine      { name: 'Charlie Robbins',
+silly testEngine        email: 'charlie.robbins@gmail.com' },
+silly testEngine      { name: 'Aria Stewart', email: 'aredridel@nbtsc.org' },
+silly testEngine      { name: 'Matthew',
+silly testEngine        email: 'N.A.',
+silly testEngine        url: 'http://github.com/matthewpflueger/' },
+silly testEngine      { name: 'Olivier El Mekki',
+silly testEngine        email: 'unknown',
+silly testEngine        url: 'http://blog.olivier-elmekki.com/' },
+silly testEngine      { name: 'Shimon Dookdin',
+silly testEngine        email: 'helpmepro1@gmail.com' },
+silly testEngine      { name: 'Daniel Cassidy',
+silly testEngine        email: 'mail@danielcassidy.me.uk',
+silly testEngine        url: 'http://www.danielcassidy.me.uk/' },
+silly testEngine      { name: 'Sam Ruby',
+silly testEngine        email: 'N/A',
+silly testEngine        url: 'http://intertwingly.net/blog/' },
+silly testEngine      { name: 'hij1nx', url: 'http://github.com/hij1nx' },
+silly testEngine      { name: 'Yonathan Randolph',
+silly testEngine        url: 'http://github.com/yonran' },
+silly testEngine      { name: 'Martin Davis',
+silly testEngine        url: 'http://github.com/waslogic' },
+silly testEngine      { name: 'Andreas Lind Petersen',
+silly testEngine        email: 'andreas@one.com' },
+silly testEngine      { name: 'd-ash', url: 'http://github.com/d-ash' },
+silly testEngine      { name: 'Robin Zhong', email: 'fbzhong@gmail.com' },
+silly testEngine      { name: 'Alexander Flatter',
+silly testEngine        email: 'flatter@gmail.com' },
+silly testEngine      { name: 'Heng Liu', email: 'liucougar@gmail.com' },
+silly testEngine      { name: 'Brian McDaniel',
+silly testEngine        url: 'http://github.com/brianmcd' },
+silly testEngine      { name: 'John Hurliman',
+silly testEngine        email: 'jhurliman@jhurliman.org' },
+silly testEngine      { name: 'Jimmy Mabey' },
+silly testEngine      { name: 'Gregory Tomlinson' },
+silly testEngine      { name: 'Jason Davies',
+silly testEngine        url: 'http://www.jasondavies.com/' },
+silly testEngine      { name: 'Josh Marshall',
+silly testEngine        url: 'http://www.ponderingtheobvious.com/' },
+silly testEngine      { name: 'Jason Priestley',
+silly testEngine        url: 'https://github.com/jhp' },
+silly testEngine      { name: 'Derek Lindahl',
+silly testEngine        url: 'https://github.com/dlindahl' },
+silly testEngine      { name: 'Chris Roebuck',
+silly testEngine        email: 'chris@quillu.com',
+silly testEngine        url: 'http://www.quillu.com' },
+silly testEngine      { name: 'Avi Deitcher',
+silly testEngine        url: 'https://github.com/deitch' },
+silly testEngine      { name: 'Nao Iizuka',
+silly testEngine        email: 'iizuka@kyu-mu.net',
+silly testEngine        url: 'https://github.com/iizukanao' },
+silly testEngine      { name: 'Peter Perenyi',
+silly testEngine        url: 'https://github.com/sinegar' } ],
+silly testEngine   bugs: 
+silly testEngine    { email: 'tmpvar@gmail.com',
+silly testEngine      url: 'http://github.com/tmpvar/jsdom/issues' },
+silly testEngine   licenses: 
+silly testEngine    [ { type: 'MIT',
+silly testEngine        url: 'http://github.com/tmpvar/jsdom/blob/master/LICENSE.txt' } ],
+silly testEngine   repositories: 
+silly testEngine    [ { type: 'git',
+silly testEngine        url: 'http://github.com/tmpvar/jsdom.git' } ],
+silly testEngine   implements: [ 'http://www.w3.org/TR/REC-DOM-Level-1' ],
+silly testEngine   dependencies: 
+silly testEngine    { htmlparser: '1.x',
+silly testEngine      request: '2.x',
+silly testEngine      cssom: '0.2.x',
+silly testEngine      contextify: '0.1.x' },
+silly testEngine   optionalDependencies: { contextify: '0.1.x' },
+silly testEngine   devDependencies: 
+silly testEngine    { nodeunit: '>=0.5.x',
+silly testEngine      'console.log': '*',
+silly testEngine      optimist: '*' },
+silly testEngine   engines: { node: '>=0.1.9' },
+silly testEngine   directories: { lib: './lib/jsdom' },
+silly testEngine   main: './lib/jsdom',
+silly testEngine   _id: 'jsdom@0.2.14',
+silly testEngine   _engineSupported: true,
+silly testEngine   _npmVersion: '1.0.106',
+silly testEngine   _nodeVersion: 'v0.4.11',
+silly testEngine   _defaultsLoaded: true,
+silly testEngine   dist: { shasum: 'e06f30683c6fdaca74a48b052c550e199e74bb15' },
+silly testEngine   _from: 'jsdom' }
+verbose caching /home/ashwini/projects/WonaNewsApp/node_modules/jsdom/package.json
+verbose into /home/ashwini/projects/WonaNewsApp [ 'runjs' ]
+verbose cache add runjs
+verbose cache add [ 'runjs', null ]
+silly cache add: name, spec, args [ undefined, 'runjs', [ 'runjs', null ] ]
+verbose parsed url { pathname: 'runjs', href: 'runjs' }
+info addNamed [ 'runjs', '' ]
+verbose addNamed [ null, '' ]
+verbose GET runjs
+verbose raw, before any munging runjs
+verbose url resolving [ 'https://registry.npmjs.org/', './runjs' ]
+verbose url resolved https://registry.npmjs.org/runjs
+silly get cb [ 404,
+silly get cb   { server: 'CouchDB/1.2.0 (Erlang OTP/R15B)',
+silly get cb     date: 'Tue, 24 Apr 2012 16:10:04 GMT',
+silly get cb     'content-type': 'application/json',
+silly get cb     'content-length': '52',
+silly get cb     'cache-control': 'must-revalidate' } ]
+ERR! 404 'runjs' is not in the npm registry.
+ERR! 404 You could maybe bug the author to publish it
+ERR! 404 Note that you can also install from a tarball or folder.
+ERR! 
+ERR! System Linux 3.0.0-16-generic
+ERR! command "node" "/home/ashwini/.nvm/v0.4.11/bin/npm" "install" "runjs"
+ERR! cwd /home/ashwini/projects/WonaNewsApp
+ERR! node -v v0.4.11
+ERR! npm -v 1.0.106
+ERR! code E404
+verbose exit [ 1, true ]

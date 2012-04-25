@@ -116,6 +116,10 @@ app.get('/view', function(req,res)
               {
                 res.render("index.html",{layout: false});
               });
+app.get('/view/json',function(req,res){
+		
+		res.redirect('/sample.json')
+	});
 app.post('/view/newer', function (req, res)
                   {
                    
