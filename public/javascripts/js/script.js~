@@ -21,20 +21,7 @@ var slider = (function(el,time){
 		if(target < 0 || target > s.max)
 			return
 		var t = s.el.getElementsByTagName('img')[target]
-		varvar slider = (function(el,time){
-	var s = {
-		el : el,
-		time : time,
-		max : el.getElementsByTagName('img').length - 1,
-		curr : 0,
-		i : 1,
-		interval : 0
-	}
-	$(s.el).addClass('slider')
-	s.slide = function(i){
-		if(!i){
-			if(s.curr == s.max)
-		 child = $('.current').stop(true,true).fadeOut(function(){this.innerHTML = ""})
+		var child = $('.current').stop(true,true).fadeOut(function(){this.innerHTML = ""})
 		$(s.el.getElementsByTagName('img')[0]).stop(true,true).animate({marginLeft : '+='+-t.offsetLeft},function(){
 			s.curr = target
 			var h = t.getAttribute('title')

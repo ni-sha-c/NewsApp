@@ -52,40 +52,14 @@ div.container{
 	.logo{
 		width:@PageWidth*0.4;
 		}
-	.archives{
-		position:relative;
-		width:@PageWidth*0.3;
+		.archives{
 		overflow:hidden;
-		.controls{
-			float:left;
-			width:100%;
-			cursor:pointer;
-			.previous{
-				position:absolute;
-				left:0px;
-				top:110px;
-				font-family:'QuicksandLight';
-			}
-			.next{
-				position:absolute;
-				right:110px;
-				top:110px;
-				font-family:'QuicksandLight';
-			}
-			.current{
-				margin-left:75px;
-				text-decoration:none;
-				font-size:14px;
-				font-family:'Caudex',verdana;
-			}
-		}
 		#archive-scroll{
 			width:110px;
 			height:143px;
 			overflow:hidden;
 			white-space:nowrap;
 			position:relative;
-			margin-left:70px;
 			img{
 				width:100%;
 				height:100%;
@@ -95,7 +69,6 @@ div.container{
 			.staged{
 				
 			}
-			
 		}
 	}
 	.links{
