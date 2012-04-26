@@ -244,7 +244,29 @@ controller.prototype = {
                                     {
                                       if(err==null)
                                        { 
-                                          console.log("inserted new article: " + title); 
+                                          console.log("inserted new article: " + title);
+                                          client.query('SELECT articles FROM' + EDITOR_TABLE + ' WHERE name = ? ', [author], function(err, results)
+                                            {
+                                                  if(err)
+                                                  {
+                                                    console.log("error retreiving articles from the editor table!");
+                                                    console.log(err);
+                                                  }
+                                                  else
+                                                  {
+                                                      var string = results[0]['articles']
+                                                      string = string + results[0]['articles']+','+ title;
+                                                      console.log(author + " has written these articles so far: " + string);
+                                                      client.query('UPDATE ' + EDITOR_TABLE + ' SET articles=? WHERE name =? ',[string,author],function(err, results)
+                                                        {
+                                                          if(err)
+                                                            console.log("couldn't update articles!");
+                                                          else
+                                                            console.log("updated articles written by " + author);
+                                                        });
+                                                }
+                                            }
+                                          );
                                           callback(info);
                                       }
                                       else 

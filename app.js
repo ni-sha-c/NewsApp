@@ -7,7 +7,8 @@ var express = require('express')
   crypto = require('crypto'),
   controller = require('./wona/controller.js'),
   MemoryStore = require('express/node_modules/connect').session.MemoryStore,
-  fs= require('fs');
+  fs= require('fs'),
+  ejs=require('ejs');
  // RedisStore = require('connect-redis')(express);
 var app = module.exports = express.createServer();
 
@@ -15,7 +16,7 @@ var app = module.exports = express.createServer();
 
 app.configure(function(){
   app.set('views', __dirname + '/views');
-  app.set('view engine', 'jade');
+  app.set('view engine', 'ejs');
   app.set("view options", {layout: false});
 
     // make a custom html template
@@ -55,19 +56,27 @@ app.get('/islogged', function (req, res)
     {
         if(req.session.username==null)
         {
-            var obj = [{"username":null,"userid":null}];
+            var obj = [
+                        {"username":null
+                        ,"userid":null}
+                      ];
             var json= JSON.stringify(obj);
-            console.log(json['username']);
+            console.log(json[0]['username']);
             res.send(json);
         }
         else
         {
-              var obj = [{"username":req.session.username, "userid" : req.session.uid}];
+              var obj = [
+                            {
+                            "username":req.session.username
+                            ,"userid" : req.session.uid
+                            }
+                        ];
               var json = JSON.stringify(obj);
               var blah = '';
               blah = blah +json;
               blah = JSON.parse(blah);
-              console.log("username is : " +blah['username']);
+              console.log("username is : " +blah[0]['username']);
               res.send(json);
           }
     });
@@ -90,31 +99,17 @@ app.get('/', function(req, res)
                   controller.findNumber(callback);
                     console.log("setting max no of pages cookie...");
                              
-                        fs.writeFile('./public/javascripts/js/script.js',                                                            
-                                           "$(document).ready(function(){  $.ajax({ url:'/post/"+ number +"' , success:function(blue){ console.log(blue);for(var i=0;i<5;i++){ var contents=\"<a  href='\"+ \"/view/\" + blue[i].pid+ \"' ><h1>\" + blue[i].title+ \"</h1></a>\";contents+=\"<p>\"+blue[i].contents+\"</p>\"; contents+=\"<div class=\'author\'>by\" + blue[i].author+ \"on\"+blue[i].time+\"</div>\"; $(\".articles-scroll\").append(contents);} } });});"  , function(err)                                            
-                                                  {
-                                                    if(err)
-                                                      {
-                                                        console.log("error writing script file");
-                                                        res.redirect('/error');
-                                                        res.end();
-                                                      }
-                                                    else
-                                                    {
-                                                        console.log("successfully wrote script file");
-                                                    }
-                                                  });
-                    setTimeout( function () {
+                                            setTimeout( function () {
                     req.session.nop = Math.floor(nop/5);
                     console.log("The maximum number of pages= " + req.session.nop);
                     },500);
-      
-                res.render("index.html",{layout: false}); 
+    
+                    res.render("index.ejs",{layout: false, locals : { cpage: req.session.page,ppage: req.session.page, npage: req.session.page+1 }}); 
                 
               });
 app.get('/view', function(req,res)
               {
-                res.render("index.html",{layout: false});
+                res.render("index.ejs",{layout: false, locals: { cpage: req.session.page, ppage: req.session.page-1, npage: req.session.page+1}});
               });
 app.get('/view/json',function(req,res){
 		
@@ -132,23 +127,9 @@ app.post('/view/newer', function (req, res)
                 number=0;
             else
               req.session.page= req.session.page-1;
-                                          fs.writeFile('./public/javascripts/js/script.js',                                                            
-                                           "$(document).ready(function(){  $.ajax({ url:'/post/"+ number +"' , success:function(blue){ console.log(blue);for(var i=0;i<5;i++){ var contents=\"<a  href='\"+ \"/view/\" + blue[i].pid+ \"' ><h1>\" + blue[i].title+ \"</h1></a>\";contents+=\"<p>\"+blue[i].contents+\"</p>\"; contents+=\"<div class=\'author\'>by\" + blue[i].author+ \"on\"+blue[i].time+\"</div>\"; $(\".articles-scroll\").append(contents);} } });});"  , function(err)                                            
-                                                  {
-                                                    if(err)
-                                                      {
-                                                        console.log("error writing script file");
-                                                        res.redirect('/error');
-                                                        res.end();
-                                                      }
-                                                    else
-                                                    {
-                                                        console.log("successfully wrote script file");
                                           
-                                                        }
-
-                                                    }
-                                                  );
+                                                    
+                                                
                                           setTimeout( function () {
                                                                 
                                                                 res.redirect('/view');
@@ -199,29 +180,11 @@ app.post('/view/older', function (req, res)
               req.session.page= req.session.page+1;
             }
 
-      
-                                          fs.writeFile('./public/javascripts/js/script.js',                                                            
-                                           "$(document).ready(function(){  $.ajax({ url:'/post/"+ number +"' , success:function(blue){ console.log(blue);for(var i=0;i<5;i++){ var contents=\"<a  href='\"+ \"/view/\" + blue[i].pid+ \"' ><h1>\" + blue[i].title+ \"</h1></a>\";contents+=\"<p>\"+blue[i].contents+\"</p>\"; contents+=\"<div class=\'author\'>by\" + blue[i].author+ \"on\"+blue[i].time+\"</div>\"; $(\".articles-scroll\").append(contents);} } });});"  , function(err)                                            
-                                                  {
-                                                    if(err)
-                                                      {
-                                                        console.log("error writing script file");
-                                                        res.redirect('/error');
-                                                        res.end();
-                                                      }
-                                                    else
-                                                    {
-                                                        console.log("successfully wrote script file");
-                                                        
-                                                    }
-
-                                                    }
-                                                  ); 
-              },10);              
-                                          setTimeout( function () {
+              },20);
+            setTimeout( function () {
                                                                 
-                                                                res.redirect('/view');
-                                                                  },20);
+                                  res.redirect('/view');
+                            },20);
            
                   });
 
@@ -240,23 +203,29 @@ app.get('/post/all', function (req, res)
 
       );
 
-      
+ app.get('/article/:pid', function (req, res)
+    {
+      var pid = req.params.pid;
+      var callback = function(data)
+      {
+        if(data==null)
+          res.redirect('/error');
+        else
+          res.send(data);
+      };
+      controller.getPost(pid,callback);
+    }
+
+      );
+
+     
   
       
 
 //Experimenting for individual articles page
 app.get('/view/:pid',function(req,res){
 	var pid = req.params.pid;
-	var callback = function(data){
-		if(data==null){
-		  console.log("couldn't retreive post!");
-		  res.redirect('/error');
-		}
-		else{
-			res.send(data);
-		}
-	};
-	controller.getPost(pid,callback);
+	res.render("article.ejs", {layout: false, locals:{ pid: pid}});
 	});
 app.get('/post/:number', function (req, res)
     {
@@ -275,7 +244,7 @@ app.get('/post/:number', function (req, res)
     });
 app.get('/error', function (req, res)
     {
-      res.render("404.html", {layout: false});
+      res.render("404.ejs", {layout: false});
     });
                                 
 app.post('/login', function(req, res){
@@ -319,7 +288,7 @@ app.get('/login/:y', function (req, res){
 
 
                 controller.error(req.params.y);
-                res.render('login.html',{layout: false});
+                res.render('login.ejs',{layout: false});
 
               }   
 });
@@ -334,7 +303,7 @@ app.get('/logout', function(req, res) {
 app.get('/signup/:y', function (req, res){
   //console.log(req.params.y);
   //controller.error(req.params.y);
-  res.render('signup.html',{layout: false});
+  res.render('signup.ejs',{layout: false});
 });
 
 app.post('/signup', function (req, res){
@@ -410,7 +379,7 @@ app.get('/write', function(req, res)
       
       else
           {
-            res.render('post.html',{layout: false});
+            res.render('post.ejs',{layout: false});
             console.log(req.session.username + "is writing a post now!");
           }
       

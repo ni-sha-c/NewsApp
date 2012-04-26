@@ -52,33 +52,23 @@ div.container{
 	.logo{
 		width:@PageWidth*0.4;
 		}
-	.archives{
-		width:@PageWidth*0.3;
+		.archives{
 		overflow:hidden;
-		.archive-scroll{
-			width:@PageWidth*1;
+		#archive-scroll{
+			width:110px;
+			height:143px;
+			overflow:hidden;
+			white-space:nowrap;
+			position:relative;
 			img{
-				height:150px;
+				width:100%;
+				height:100%;
+				display:inline;
+				margin:0;
 			}
-			div{
-				width:@PageWidth*0.4;
-				float:left;
-				height:150px;
+			.staged{
+				
 			}
-			span{
-				color:#454545;
-			}
-		}
-		.controls{
-			color:#000;
-			text-decoration:none;
-			float:right;
-		}
-		.previous{
-			.controls;
-		}
-		.next{
-			.controls;
 		}
 	}
 	.links{
