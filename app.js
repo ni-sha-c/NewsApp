@@ -8,7 +8,8 @@ var express = require('express')
   controller = require('./wona/controller.js'),
   MemoryStore = require('express/node_modules/connect').session.MemoryStore,
   fs= require('fs'),
-  ejs=require('ejs');
+  ejs=require('ejs'),
+  config= require('./config.js');
  // RedisStore = require('connect-redis')(express);
 var app = module.exports = express.createServer();
 
@@ -221,7 +222,7 @@ app.get('/post/all', function (req, res)
 //Experimenting for individual articles page
 app.get('/view/:pid',function(req,res){
 	var pid = req.params.pid;
-	res.render("article.ejs", {layout: false, locals:{ pid: pid}});
+	res.render("article.ejs", {layout: false, locals:{ pid: pid, user: req.session.username}});
 	});
 app.get('/post/:number', function (req, res)
     {
@@ -336,6 +337,27 @@ app.post('/signup', function (req, res){
         
 
 });
+app.get('/edit/:pid', function(req, res)
+    {
+      var pid = req.params.pid;
+      console.log(pid);
+      var callback = function (data)
+       {
+         console.log(data);
+        console.log("author of this article is : " + data[0].author);
+        if(data[0].author==req.session.username)
+          {
+            console.log(req.session.username + "is now editing the article" + data[0].title);
+            res.render("edit.ejs", { layout : false, locals : { pid :pid , space : data[0].contents }});
+          }
+          else
+            {
+              console.log("this user cannot edit this article!");
+              res.redirect('/error');
+            }
+      };
+      controller.getPost(pid, callback);
+    });
 app.post('/post', function(req, res)
     {
         var article = req.body.contents;
@@ -381,7 +403,29 @@ app.get('/write', function(req, res)
       
 
     });
-  
+app.post('/update/:pid', function(req, res)
+    {
+        var pid= req.params.pid;
+        console.log("inside /update " + pid);
+        var article = req.body.contents;
+        console.log(article);
+        var callback = function(data)
+                        {
+                            if(data==null)
+                            {            
+                              console.log("sorry!error in posting the article!");
+                              res.redirect('/error');
+                            }
+                            else
+                             {
+                               console.log(data);
+                               res.redirect('/');
+                             }
+                        };
+      
+      controller.updatePost(pid,article,req.session.username,callback);
+    });
+ 
 
 
 

@@ -1,15 +1,15 @@
 //var view = require('./view.js'),
-var mysql = require('mysql');
+var mysql = require('mysql'), config = require('./../config.js');
 var crypto = require('crypto');
 var mysql = require('mysql');
-var DATABASE = 'wona';
+var DATABASE = config.database;
 var EDITOR_TABLE = 'editor';
 var POST_TABLE='posts';
 var jsdom = require('jsdom');
     //htmlparser=require('htmlparser');
 var client = mysql.createClient({
-		user: 'root',
-      password: 'hello',
+		user: config.db_user,
+      password: config.db_pass,
 });
 
 // If no callback is provided, any errors will be emitted as `'error'`
@@ -245,7 +245,7 @@ controller.prototype = {
                                       if(err==null)
                                        { 
                                           console.log("inserted new article: " + title);
-                                          client.query('SELECT articles FROM' + EDITOR_TABLE + ' WHERE name = ? ', [author], function(err, results)
+                                          /*client.query('SELECT articles FROM ' + EDITOR_TABLE + ' WHERE name = ? ', [author], function(err, results)
                                             {
                                                   if(err)
                                                   {
@@ -254,7 +254,9 @@ controller.prototype = {
                                                   }
                                                   else
                                                   {
-                                                      var string = results[0]['articles']
+                                                      var string = results[0]['articles'];
+                                                      console.log(typeof string);
+                                                      var json = JSON.parse(string);
                                                       string = string + results[0]['articles']+','+ title;
                                                       console.log(author + " has written these articles so far: " + string);
                                                       client.query('UPDATE ' + EDITOR_TABLE + ' SET articles=? WHERE name =? ',[string,author],function(err, results)
@@ -266,7 +268,7 @@ controller.prototype = {
                                                         });
                                                 }
                                             }
-                                          );
+                                          );*/
                                           callback(info);
                                       }
                                       else 
@@ -297,6 +299,75 @@ controller.prototype = {
                 
                 
                 },
+
+      updatePost : function(pid,article,author,callback)
+                {
+                        
+                        
+                          
+                        var findTitle = function (title)
+                        { 
+                                 client.query('UPDATE '+POST_TABLE+' SET title = ?, author = ?,contents = ? WHERE pid = ?',[title, author, article, pid], function( err, info)
+                                    {
+                                      if(err==null)
+                                       { 
+                                          console.log("inserted new article: " + title);
+                                          /*client.query('SELECT articles FROM ' + EDITOR_TABLE + ' WHERE name = ? ', [author], function(err, results)
+                                            {
+                                                  if(err)
+                                                  {
+                                                    console.log("error retreiving articles from the editor table!");
+                                                    console.log(err);
+                                                  }
+                                                  else
+                                                  {
+                                                      var string = results[0]['articles'];
+                                                      console.log(typeof string);
+                                                      var json = JSON.parse(string);
+                                                      string = string + results[0]['articles']+','+ title;
+                                                      console.log(author + " has written these articles so far: " + string);
+                                                      client.query('UPDATE ' + EDITOR_TABLE + ' SET articles=? WHERE name =? ',[string,author],function(err, results)
+                                                        {
+                                                          if(err)
+                                                            console.log("couldn't update articles!");
+                                                          else
+                                                            console.log("updated articles written by " + author);
+                                                        });
+                                                }
+                                            }
+                                          );*/
+                                          callback(info);
+                                      }
+                                      else 
+                                      {
+                                        console.log(err);
+                                        callback(null);
+                                      }
+                                    } 
+            
+                                            );};
+
+                                              jsdom.env(article, [ './../public/javascripts/js/libs/jquery-1.7.1.min.js'], function (errors, window)
+                            {
+                              var title = window.$("h4").text();
+                              console.log("title of the post is : "+ window.$("h4").text());
+                             
+                              //var pid = crypto.createHash('sha1').update(crypto.createHash('md5').update(title).digest('hex')).digest('hex');
+                              //console.log(pid); 
+                              findTitle(title);
+
+                            }
+                                );
+
+             
+              
+                
+                
+                
+                },
+
+
+ 
 
     getPost : function (pid,callback)
               {

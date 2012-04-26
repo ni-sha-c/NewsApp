@@ -46,17 +46,33 @@
 		}
              });   
 
-           $(document).ready(function(){  $.ajax({ url:'../../article/<%= pid %>' , success:function(blue){ 
-                 console.log(blue);
-                 console.log($(".articles-scroll").html());
-                 var contents=null;
-                 contents="<h1>" + blue[0].title+ "</h1></a>";
-                 contents+="<div class='fb-like' data-send='false' data-width='450' data-show-faces='true'></div>";
-      contents+="<p>"+blue[0].contents+"</p>"; 
-      contents+="<div class='author'>by " + blue[0].author+ "  on  "+blue[0].time+"</div>"; 
-      $(".articles-scroll").append(contents);
-      } 
-      })
+            $(function(){  
+                      $.ajax({ url:'../../article/<%= pid %>' , success:function(blue){ 
+
+                                                             
+                                                      //var blue = jQuery.parseJSON(data);
+                                                      console.log("blue is " + blue);
+                                                      console.log($(".articles-scroll").html());
+                                                      var contents=null;
+                                                      if(blue[0].author=="<%= user %>")
+                                                      {
+                                                         
+                                                      contents="<form method='get' action='../../edit/<%= pid %>'><input name='<%= pid %>' style='float:right' type='submit' value='edit'/></form>";
+                                                          contents+="<h1>" + blue[0].title+ "</h1></a>";
+                //contents+="<div class='fb-like' data-send='false' data-width='450' data-show-faces='true'></div>";
+                                                          contents+="<p>"+blue[0].contents+"</p>"; 
+                                                          contents+="<div class='author'>by " + blue[0].author+ "  on  "+blue[0].time+"</div>"; 
+                                                      }
+                                                      else
+                                                      {
+                                                          contents="<h1>" + blue[0].title+ "</h1></a>";
+                    //contents+="<div class='fb-like' data-send='false' data-width='450' data-show-faces='true'></div>";
+                                                          contents+="<p>"+blue[0].contents+"</p>"; 
+                                                          contents+="<div class='author'>by " + blue[0].author+ "  on  "+blue[0].time+"</div>"; 
+                                                      }
+                                                      $(".articles-scroll").append(contents);
+                                                  } 
+                              });
                }); 
       
     
@@ -168,7 +184,7 @@
 			Sri Mangu has been serving as the Director (Works) DMRC since 2002.
 		</p>-->
               </div>
-              <div class="fb-comments" data-href="http://facebook.com/sdslabs" data-via-url="http://facebook.com/sdslabs" data-always-post-to-friends="false" data-num-posts="2" data-width="470"></div>
+              <!--<div class="fb-comments" data-href="http://facebook.com/sdslabs" data-via-url="http://facebook.com/sdslabs" data-always-post-to-friends="false" data-num-posts="2" data-width="470"></div>-->
                         
 	<div class="auxiliary-block">
 		<h3>Wona Blog</h3>
