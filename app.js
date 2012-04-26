@@ -112,6 +112,10 @@ app.get('/view', function(req,res)
               {
                 res.render("index.ejs",{layout: false, locals: { cpage: req.session.page, ppage: req.session.page-1, npage: req.session.page+1}});
               });
+app.get('/view/json',function(req,res){
+		
+		res.redirect('/sample.json')
+	});
 app.post('/view/newer', function (req, res)
                   {
                    
