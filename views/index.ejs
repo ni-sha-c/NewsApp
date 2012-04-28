@@ -21,7 +21,7 @@
                   { 
                           background-color: Transparent;                 
                           text-decoration: underline;                 
-                          color: blue;
+                          color: violet;
                           cursor: pointer; 
                           border:0
                   }    
@@ -137,7 +137,18 @@
 	</div>
 	<div class="articles-block">
 		<h3>Articles</h3>
-		<div class="articles-scroll"></div>
+                <div class="articles-scroll"></div>
+                <div class="form">
+          <form method="post" action='/view/older' name="pageform">
+            <input type="submit" class="text-button"  name="<%= npage %>" value="Older Posts"/>
+          </form>
+          <form method="post" action='/view/newer'>
+            <input type="submit" class="text-button" style="float:right" name="<%= ppage %>" value="Newer Posts"/>
+          </form>
+
+
+          </div>
+
               </div>
                         
 	<div class="auxiliary-block">
@@ -158,16 +169,6 @@
 </div>
 
 <footer>
-<div class="form">
-          <form method="post" action='/view/older' name="pageform">
-            <input type="submit" class="text-button"  name="<%= npage %>" value="Older Posts"/>
-          </form>
-          <form method="post" action='/view/newer'>
-            <input type="submit" class="text-button" style="float:right" name="<%= ppage %>" value="Newer Posts"/>
-          </form>
-
-
-          </div>
 
 
 <div class="footer-note">

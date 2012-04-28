@@ -66,7 +66,7 @@
                                                       else
                                                       {
                                                           contents="<h1>" + blue[0].title+ "</h1></a>";
-                    //contents+="<div class='fb-like' data-send='false' data-width='450' data-show-faces='true'></div>";
+                    contents+="<div class='fb-like' data-send='false' data-width='450' data-show-faces='true'></div>";
                                                           contents+="<p>"+blue[0].contents+"</p>"; 
                                                           contents+="<div class='author'>by " + blue[0].author+ "  on  "+blue[0].time+"</div>"; 
                                                       }
@@ -182,12 +182,14 @@
 			<img src="./img/1.jpg">	
 			Sri Mangu Singh, a UoR alumnus, is to take over as the new Managing Director of Delhi Metro Rail Corporation from January 1, 2012 as E. Sreedharan, the 'Metro Man', finally hangs up his boots after serving as the Delhi Metro Chief for 15 years.
 			Sri Mangu has been serving as the Director (Works) DMRC since 2002.
-		</p>-->
+                                 </p>-->
+                                 <h3><a href="/">Home</a></h3>
+
               </div>
-
-
-              <div class="fb-comments" data-href="wona.sdslabs.co.in/view/<%= pid %>" data-via-url="http://facebook.com/sdslabs" data-always-post-to-friends="false" data-num-posts="2" data-width="470"></div>
-
+           
+              <div>
+                <fb:comments url="http://wona.sdslabs.co.in/view/<%= pid %>" href='http://wona.co.in' data-always-post-to-friends="false" simple='1' numposts="4" data-width="470"></fb:comments>
+              </div>
                         
 	<div class="auxiliary-block">
 		<h3>Wona Blog</h3>
@@ -208,8 +210,7 @@
 
 <footer>
 <div class="form">
-  <a href="/">Home</a>
-          
+           
                    </div>
 
 
